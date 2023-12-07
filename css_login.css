@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+.login_box img {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.login_box {
+    border-radius: 20px;
+    background: #F5F5F5;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
+    width: 698px;
+    height: 500px;
+    flex-shrink: 0;
+    margin: 0 auto;
+}
+
+.login_box h2 {
+    width: 638px;
+    height: 71px;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    line-height: normal;
+    margin: 10px auto;
+}
+
+.login_input {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 30px auto;
+    width: 50%;
+
+}
+
+.login_input>input {
+    width: 100%;
+    height: 45px;
+    padding-left: 10px;
+    border-radius: 5px;
+    border-left: 5px solid #F15A2A;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    background: #e6e6e6;
+    font-size: 18px;
+}
+
+.login_input button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 10px;
+    background: #F15A2A;
+    border: none;
+}
+
+.login_remember{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
