@@ -2,10 +2,13 @@
 include("header_admin.php");
 ?>
 
-<style>
+<script>
+    // JavaScript để tự động gửi biểu mẫu khi giá trị dropdown thay đổi
+    function updateResultsPerPage() {
+        document.getElementById("pagination-form").submit();
+    }
+</script>
 
-
-</style>
 
 <div>
     <div class="top-center">
@@ -33,8 +36,17 @@ include("header_admin.php");
             </div>
         </div>
         <div class="cdm">
-            <p>chọn danh mục
-            <p>
+            <form method="get" action="" id="pagination-form">
+                <label for="itemsPerPage">Số lượng:</label>
+                <select name="itemsPerPage" id="itemsPerPage" onchange="updateResultsPerPage()">
+                    <option value="2">--chọn--</option>
+                    <option value="2">2</option>
+                    <option value="4">4</option>
+                    <option value="6">6</option>
+                    <option value="10">10</option>
+
+                </select>
+            </form>
         </div>
         <div class="table">
             <table width="100%" class="table-content">
@@ -52,13 +64,25 @@ include("header_admin.php");
                 </tr>
                 <?php
                 include("ketnoi.php");
-                $sql = "select * from giangvien";
+
+                // Các biến về phân trang và số lượng mục
+                $items_per_page = isset($_GET['itemsPerPage']) ? (int)$_GET['itemsPerPage'] : 5;
+                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Chuyển đổi sang số nguyên
+                $offset = ($page - 1) * $items_per_page;
+
+                // Chỉnh sửa câu truy vấn SQL dựa trên số lượng mục được chọn
+                if ($items_per_page == 'all') {
+                    $sql = "SELECT * FROM giangvien";
+                } else {
+                    $sql = "SELECT * FROM giangvien LIMIT $offset, $items_per_page";
+                }
+
                 $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người dùng " . mysqli_error());
 
                 while ($row = mysqli_fetch_array($kq)) {
 
                     $bomons = $row["mabomon"];
-                    $sql2 = "select * from bomon where mabomon='" . $bomons . "'";
+                    $sql2 = "SELECT * FROM bomon WHERE mabomon='" . $bomons . "'";
                     $kq2 = mysqli_query($conn, $sql2) or die("Không thể xuất thông tin người dùng " . mysqli_error());
                     $bomon = mysqli_fetch_array($kq2);
 
@@ -79,14 +103,25 @@ include("header_admin.php");
                     </td>";
                     echo "</tr>";
                 }
+
+                // Tính toán số trang và trang hiện tại
+                $total_items = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM giangvien"));
+                $number_of_pages = ceil($total_items / $items_per_page);
+                $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
                 ?>
             </table>
-
-
+            <div class="sotrang">
+                <?php
+                for ($page = 1; $page <= $number_of_pages; $page++) {
+                    $active_class = ($page == $current_page) ? 'active' : ''; // Kiểm tra xem có phải là trang hiện tại không
+                    echo '<a href="?page=' . $page . '&itemsPerPage=' . $items_per_page . '" class="' . $active_class . '">' . $page . '</a> ';
+                }
+                ?>
+            </div>
         </div>
     </div>
 </div>
-
 <?php
 include("footer_admin.php");
 ?>

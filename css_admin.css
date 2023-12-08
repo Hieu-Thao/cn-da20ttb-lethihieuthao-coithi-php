@@ -201,6 +201,7 @@ html{
     flex-wrap: wrap;
     padding: 10px 10px;
     flex-direction: column;
+    margin-bottom: 30px;
 }
 
 /* các button */
@@ -283,8 +284,45 @@ table, th, td{
 }
 
 .table-icon button{
-    background-color: #004172;
+    padding: 5px 5px;
+    border-radius: 5px;
+    border: none;
 }
+
+.table-icon button ion-icon {
+    margin: 0 auto;
+    color: #004172;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.sotrang {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Điều chỉnh khoảng cách trên trang nếu cần */
+}
+
+.sotrang{
+    font-weight: bold;
+    gap: 10px;
+}
+    
+.sotrang a{
+    text-decoration: none;
+    color: #004172;
+}
+
+.sotrang a.active {
+    background-color: #FFCC70;
+    color: #000000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
 
 
 
