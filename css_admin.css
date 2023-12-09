@@ -192,16 +192,14 @@ html{
     font-size: 20px;
 }
 /* thân web */
-.table-center{
+.table-center {
     display: flex;
     width: 95%;
     background-color: #ffffff;
     margin: 0 auto;
     border-radius: 5px;
-    flex-wrap: wrap;
     padding: 10px 10px;
     flex-direction: column;
-    margin-bottom: 30px;
 }
 
 /* các button */
@@ -243,7 +241,7 @@ html{
 }
 
 .button-xtt{
-    background-color: #C8C8C8;
+    background-color: #8CA1A5;
 }
 .btn-center-search {
     display: flex;
@@ -270,17 +268,20 @@ html{
 
 .cdm{
     display: flex;
-    padding: 10px 0; 
+    padding: 10px 0;
+    margin-left: 20px;
 }
 
 table, th, td{
     border:1px solid black;
+    text-align: center;
 }
 
 .table-content{
     border-collapse:collapse;
-    margin-top: 20px;
     text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
 .table-icon button{

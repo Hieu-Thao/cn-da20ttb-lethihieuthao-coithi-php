@@ -44,7 +44,6 @@ include("header_admin.php");
                     <option value="4">4</option>
                     <option value="6">6</option>
                     <option value="10">10</option>
-
                 </select>
             </form>
         </div>
@@ -71,16 +70,10 @@ include("header_admin.php");
                 $offset = ($page - 1) * $items_per_page;
 
                 // Chỉnh sửa câu truy vấn SQL dựa trên số lượng mục được chọn
-                if ($items_per_page == 'all') {
-                    $sql = "SELECT * FROM giangvien";
-                } else {
-                    $sql = "SELECT * FROM giangvien LIMIT $offset, $items_per_page";
-                }
-
+                $sql = "SELECT * FROM giangvien LIMIT $offset, $items_per_page";
                 $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người dùng " . mysqli_error());
-
                 while ($row = mysqli_fetch_array($kq)) {
-
+                    
                     $bomons = $row["mabomon"];
                     $sql2 = "SELECT * FROM bomon WHERE mabomon='" . $bomons . "'";
                     $kq2 = mysqli_query($conn, $sql2) or die("Không thể xuất thông tin người dùng " . mysqli_error());
