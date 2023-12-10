@@ -9,7 +9,7 @@ include("header_admin.php");
     <div class="table-center">
         <div class="btn-center">
             <div class="btn-center-bt">
-                <a href="#" class="button button-them">
+                <a href="them_namhoc.php" class="button button-them">
                     <ion-icon name="add-outline"></ion-icon>
                     <p>Thêm năm học</p>
                 </a>
@@ -61,3 +61,7 @@ include("header_admin.php");
         </div>
     </div>
 </div>
+
+<?php
+include("footer_admin.php");
+?>

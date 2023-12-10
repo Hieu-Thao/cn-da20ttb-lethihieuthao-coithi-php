@@ -107,7 +107,7 @@ if (!isset($_SESSION["admin"])) {
                     <ion-icon name="create"></ion-icon>
                     <p>Quản lý hình thức</p>
                 </a>
-                <a href="PCCT.php" class="s-left-item">
+                <a href="QLPCCT.php" class="s-left-item">
                     <ion-icon name="ribbon"></ion-icon>
                     <p>Phân công coi thi</p>
                 </a>

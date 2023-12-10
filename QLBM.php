@@ -9,7 +9,7 @@ include("header_admin.php");
     <div class="table-center">
         <div class="btn-center">
             <div class="btn-center-bt">
-                <a href="#" class="button button-them">
+                <a href="them_bomon.php" class="button button-them">
                     <ion-icon name="add-outline"></ion-icon>
                     <p>Thêm bộ môn</p>
                 </a>
@@ -44,7 +44,7 @@ include("header_admin.php");
 
                     echo "<td class='table-icon'>
                     <a href='sua.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
-                    <a href='xoa.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>
+                    <a href='xoa_bomon.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>
                     </td>";
                     
                     echo "</tr>";

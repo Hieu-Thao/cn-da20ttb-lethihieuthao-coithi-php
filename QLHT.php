@@ -2,13 +2,6 @@
 include("header_admin.php");
 ?>
 
-<script>
-    // JavaScript để tự động gửi biểu mẫu khi giá trị dropdown thay đổi
-    function updateResultsPerPage() {
-        document.getElementById("pagination-form").submit();
-    }
-</script>
-
 <div>
     <div class="top-center">
         <p>Quản lý hình thức thi</p>
@@ -16,7 +9,7 @@ include("header_admin.php");
     <div class="table-center">
         <div class="btn-center">
             <div class="btn-center-bt">
-                <a href="#" class="button button-them">
+                <a href="them_hinhthuc.php" class="button button-them">
                     <ion-icon name="add-outline"></ion-icon>
                     <p>Thêm hình thức</p>
                 </a>
@@ -31,19 +24,18 @@ include("header_admin.php");
             </div>
             <div class="btn-center-search">
                 <input type="text" name="tendn" placeholder="Tìm kiếm" required>
-                <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+                <button type="submit">
+                    <ion-icon name="search-outline"></ion-icon>
+                </button>
             </div>
         </div>
         <div class="cdm">
             <form method="get" action="" id="pagination-form">
                 <label for="itemsPerPage">Số lượng:</label>
-                <select name="itemsPerPage" id="itemsPerPage" onchange="updateResultsPerPage()">
-                    <option value="2">--chọn--</option>
-                    <option value="2">2</option>
-                    <option value="4">4</option>
-                    <option value="6">6</option>
-                    <option value="10">10</option>
-
+                <select class="form-control" onchange="selectdata(this.options[this.selectedIndex].value)">
+                    <option value="All">Tất cả</option>
+                    <option value="TN">Tự luận</option>
+                    <option value="TH">Thực hành</option>
                 </select>
             </form>
         </div>
@@ -60,12 +52,7 @@ include("header_admin.php");
                 </tr>
                 <?php
                 include("ketnoi.php");
-                // Các biến về phân trang và số lượng mục
-                $items_per_page = isset($_GET['itemsPerPage']) ? (int)$_GET['itemsPerPage'] : 5;
-                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Chuyển đổi sang số nguyên
-                $offset = ($page - 1) * $items_per_page;
-
-                $sql = "SELECT * FROM hinhthuc LIMIT $offset, $items_per_page";
+                $sql = "SELECT * FROM hinhthuc";
                 $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người dùng " . mysqli_error());
                 while ($row = mysqli_fetch_array($kq)) {
                     echo "<tr>";
@@ -82,22 +69,12 @@ include("header_admin.php");
                     </td>";
                     echo "</tr>";
                 }
-
-                // Tính toán số trang và trang hiện tại
-                $total_items = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM giangvien"));
-                $number_of_pages = ceil($total_items / $items_per_page);
-                $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
                 ?>
             </table>
-            <div class="sotrang">
-                <?php
-                for ($page = 1; $page <= $number_of_pages; $page++) {
-                    $active_class = ($page == $current_page) ? 'active' : ''; // Kiểm tra xem có phải là trang hiện tại không
-                    echo '<a href="?page=' . $page . '&itemsPerPage=' . $items_per_page . '" class="' . $active_class . '">' . $page . '</a> ';
-                }
-                ?>
-            </div>
         </div>
     </div>
 </div>
+
+<?php
+include("footer_admin.php");
+?>
