@@ -1,5 +1,13 @@
 <?php
 include("header_admin.php");
+
+include("ketnoi.php");
+
+$usern = $_GET["user"];
+
+$sql = "SELECT * FROM monhoc WHERE mamon = '$usern'";
+$kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin bộ môn " . mysqli_error());
+$row = mysqli_fetch_array($kq);
 ?>
 
 <div>
@@ -13,18 +21,18 @@ include("header_admin.php");
             </div>
         </div>
         <div class="txt-gv-top">
-            <form enctype="multipart/form-data" action="xuly_them_monhoc.php" name="frmxlmh" method="post">
+            <form enctype="multipart/form-data" action="thuchien_sua_monhoc.php" name="frmxlmh" method="post">
                 <div class="txt-gv-lb">
                     <label>Mã môn học:</label>
-                    <input type="text" name="mamon"></input>
+                    <input type="text" name="mamon" value="<?php echo $row["mamon"]; ?>" readonly></input>
                 </div>
                 <div class="txt-gv-lb">
                     <label>Tên môn học:</label>
-                    <input type="text" name="tenmon"></input>
+                    <input type="text" name="tenmon" value="<?php echo $row["tenmon"]; ?>"></input>
                 </div>
                 <div class="txt-gv-lb">
                     <label>Số tín chỉ:</label>
-                    <input type="text" name="sotinchi"></input>
+                    <input type="text" name="sotinchi" value="<?php echo $row["sotinchi"]; ?>"></input>
                 </div>
         </div>
         <div class="txt-btn">
@@ -34,6 +42,7 @@ include("header_admin.php");
         </form>
     </div>
 </div>
+
 <?php
 include("footer_admin.php");
 ?>

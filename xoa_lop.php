@@ -19,7 +19,7 @@ include("header_admin.php");
     echo ("<script language=javascript>
     {
     alert('Xóa thành công');
-    window.location='QLBM.php';}
+    window.location='QLL.php';}
     </script> ");
 ?>
 

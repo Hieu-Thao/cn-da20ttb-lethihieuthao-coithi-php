@@ -28,7 +28,7 @@ $row = mysqli_fetch_array($kq);
         </div>
         <div class="txt-btn">
             <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại" />
-            <input class="txt-btn-huy" type="submit" name="huy" value="Hủy bỏ" />
+            <a style="text-decoration: none;" class="txt-btn-huy" type="reset" href="QLL.php">Hủy bỏ</a>
         </div>
         </form>
     </div>

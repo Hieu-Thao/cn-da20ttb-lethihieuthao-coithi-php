@@ -11,7 +11,7 @@ $sql = "UPDATE lop SET tenlop = '$tenlop' WHERE malop = '$malop'";
 $kq = mysqli_query($conn, $sql) or die("Không thể cập nhật lớp: " . mysqli_error($conn));
 
 echo "<script language=javascript>
-        alert('Cập nhật bộ môn thành công');
+        alert('Cập nhật lớp thành công');
         window.location='QLL.php';
     </script>";
 ?>

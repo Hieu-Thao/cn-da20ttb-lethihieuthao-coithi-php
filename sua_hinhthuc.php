@@ -1,5 +1,13 @@
 <?php
 include("header_admin.php");
+
+include("ketnoi.php");
+
+$usern = $_GET["user"];
+
+$sql = "SELECT * FROM hinhthuc WHERE mahinhthuc = '$usern'";
+$kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin bộ môn " . mysqli_error());
+$row = mysqli_fetch_array($kq);
 ?>
 
 <div>
@@ -13,22 +21,26 @@ include("header_admin.php");
             </div>
         </div>
         <div class="txt-gv-top">
-            <form enctype="multipart/form-data" action="xuly_them_hinhthuc.php" name="frmxlht" method="post">
-                <div class="txt-gv-lb">
+            <form enctype="multipart/form-data" action="thuchien_sua_hinhthuc.php" name="frmxlht" method="post">
+            <div class="txt-gv-lb">
+                    <label>Mã hình thức:</label>
+                    <input type="text" name="mahinhthuc" value="<?php echo $row["mahinhthuc"]; ?>" readonly></input>
+                </div>    
+            <div class="txt-gv-lb">
                     <label>Tên hình thức:</label>
-                    <input type="text" name="tenhinhthuc"></input>
+                    <input type="text" name="tenhinhthuc" value="<?php echo $row["tenhinhthuc"]; ?>"></input>
                 </div>
                 <div class="txt-gv-lb">
                     <label>Thời gian:</label>
-                    <input type="text" name="thoigian"></input>
+                    <input type="text" name="thoigian" value="<?php echo $row["thoigian"]; ?>"></input>
                 </div>
                 <div class="txt-gv-lb">
                     <label>Buổi:</label>
-                    <input type="text" name="buoi"></input>
+                    <input type="text" name="buoi" value="<?php echo $row["buoi"]; ?>"></input>
                 </div>
                 <div class="txt-gv-lb">
                     <label>Đơn giá:</label>
-                    <input type="text" name="dongia"></input>
+                    <input type="text" name="dongia" value="<?php echo $row["dongia"]; ?>"></input>
                 </div>
         </div>
         <div class="txt-btn">

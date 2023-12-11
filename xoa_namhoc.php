@@ -14,12 +14,12 @@ include("header_admin.php");
 
 <?php include("ketnoi.php");
     $user_xoa=$_REQUEST["user"]; //Nhận giá trị user từ link xóa của quantri.php
-    $sql="delete from bomon where mabomon='".$user_xoa."'";
-    $kq=mysqli_query($conn, $sql) or die ("Không thể xuất thông tin người dùng " . mysqli_error());
+    $sql="delete from namhoc where manamhoc='".$user_xoa."'";
+    $kq=mysqli_query($conn, $sql) or die ("Không thể xuất thông tin người dùng ".mysqli_error());
     echo ("<script language=javascript>
     {
     alert('Xóa thành công');
-    window.location='QLBM.php';}
+    window.location='QLNH.php';}
     </script> ");
 ?>
 

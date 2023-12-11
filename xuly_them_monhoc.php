@@ -3,15 +3,16 @@ session_start();
 
 include("ketnoi.php");
 
-$malop = $_POST["malop"];
-$tenlop = $_POST["tenlop"];
+$mamon = $_POST["mamon"];
+$tenmon = $_POST["tenmon"];
+$sotinchi = $_POST["sotinchi"];
 
 // Thêm bộ môn mới vào CSDL với khóa chính tự động tăng
-$sql = "INSERT INTO lop VALUES ('" . $malop . "', '" . $tenlop . "')";
+$sql = "INSERT INTO monhoc VALUES ('" . $mamon . "', '" . $tenmon . "', '" . $sotinchi . "')";
 $kq = mysqli_query($conn, $sql) or die("Không thể thêm bộ môn: " . mysqli_error($conn));
 
 echo "<script language=javascript>
-        alert('Thêm lớp thành công');
-        window.location='QLL.php';
+        alert('Thêm môn học thành công');
+        window.location='QLMH.php';
     </script>";
 ?>
