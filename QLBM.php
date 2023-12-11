@@ -43,7 +43,7 @@ include("header_admin.php");
                     echo "<td>" . $row["tenbomon"] . "</td>";
 
                     echo "<td class='table-icon'>
-                    <a href='sua.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
+                    <a href='sua_bomon.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
                     <a href='xoa_bomon.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>
                     </td>";
                     

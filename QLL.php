@@ -59,8 +59,8 @@ include("header_admin.php");
                     $usern = $row["malop"];
                     echo "<td>" . $row["tenlop"] . "</td>";
                     echo "<td class='table-icon'>
-                    <a href='sua.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
-                    <a href='xoa.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>
+                    <a href='sua_lop.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
+                    <a href='xoa_lop.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>
                     </td>";
                     echo "</tr>";
                 }

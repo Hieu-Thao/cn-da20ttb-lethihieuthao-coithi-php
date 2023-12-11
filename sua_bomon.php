@@ -1,18 +1,21 @@
 <?php
 include("header_admin.php");
+
+include("ketnoi.php");
+
+$usern = $_GET["user"];
+
+$sql = "SELECT * FROM bomon WHERE mabomon = '$usern'";
+$kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin bộ môn " . mysqli_error());
+$row = mysqli_fetch_array($kq);
 ?>
 
 <div>
     <div class="top-center">
-        <p class="top-center-p">Quản lý lớp</p>
+        <p class="top-center-p">Sửa bộ môn</p>
     </div>
     <div class="table-center">
-        <div class="btn-center">
-            <div class="btn-center-bt">
-                <p>Thêm mới lớp</p>
-            </div>
-        </div>
-        <div class="txt-gv-top-lop">
+    <div class="txt-gv-top-lop">
             <form enctype="multipart/form-data" action="xuly_them_lop.php" name="frmxll" method="post">
                 <div class="txt-gv-lb">
                     <label>Mã lớp:</label>
@@ -30,6 +33,7 @@ include("header_admin.php");
         </form>
     </div>
 </div>
+
 <?php
 include("footer_admin.php");
 ?>

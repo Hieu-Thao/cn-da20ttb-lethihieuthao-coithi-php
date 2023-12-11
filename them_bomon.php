@@ -14,7 +14,11 @@ include("header_admin.php");
         </div>
         <div class="txt-gv-top">
             <form enctype="multipart/form-data" action="xuly_them_bomon.php" name="frmxlbm" method="post">
-                <div class="txt-gv-lb">
+            <div class="txt-gv-lb">
+                    <label>Mã bộ môn: (*)</label>
+                    <input type="text" name="mabomon" readonly></input>
+                </div>
+            <div class="txt-gv-lb">
                     <label>Tên bộ môn</label>
                     <input type="text" name="tenbomon"></input>
                 </div>
