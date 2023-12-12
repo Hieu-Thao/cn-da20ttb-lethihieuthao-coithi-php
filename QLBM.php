@@ -1,7 +1,6 @@
 <?php
 include("header_admin.php");
 ?>
-
 <div>
     <div class="top-center">
         <p>Quản lý bộ môn</p>
@@ -55,6 +54,7 @@ include("header_admin.php");
         </div>
     </div>
 </div>
+
 <?php
 include("footer_admin.php");
 ?>

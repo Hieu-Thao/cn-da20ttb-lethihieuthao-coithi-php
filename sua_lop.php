@@ -9,7 +9,7 @@ $sql = "SELECT * FROM lop WHERE malop = '$usern'";
 $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin bộ môn " . mysqli_error());
 $row = mysqli_fetch_array($kq);
 ?>
-
+<form>
 <div>
     <div class="top-center">
         <p class="top-center-p">Sửa lớp</p>
@@ -33,7 +33,7 @@ $row = mysqli_fetch_array($kq);
         </form>
     </div>
 </div>
-
+</form>
 <?php
 include("footer_admin.php");
 ?>

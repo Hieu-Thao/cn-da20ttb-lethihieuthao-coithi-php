@@ -1,7 +1,7 @@
 <?php
 include("header_admin.php");
 ?>
-
+<form>
 <div>
     <div class="top-center">
         <p class="top-center-p">Quản lý năm học</p>
@@ -38,6 +38,7 @@ include("header_admin.php");
         </form>
     </div>
 </div>
+</form>
 <?php
 include("footer_admin.php");
 ?>

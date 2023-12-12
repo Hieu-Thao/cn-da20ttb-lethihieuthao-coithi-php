@@ -348,6 +348,13 @@ table, th, td {
     margin: 20px 0px;
 }
 
+.txt-gv-bot-cc{
+    display: flex;
+    gap: 30px;
+    justify-content: space-evenly;
+    margin: 20px 0px;
+}
+
 .txt-gv-top-lop{
     display: flex;
     gap: 30px;

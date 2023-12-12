@@ -12,9 +12,9 @@ $email = $_POST["email"];
 $pass = $_POST["pass"];
 
 // Xử lý upload hình đại diện
-$duongdan = "hinhanh/"; // Thư mục lưu trữ hình ảnh, bạn cần tạo thư mục này trong dự án của mình
-$duongdan = $duongdan . basename($_FILES["hinhanhgv"]["name"]);
-move_uploaded_file($_FILES["hinhanhgv"]["tmp_name"], $duongdan);
+$duongdan = "./hinhanh/"; // Thư mục lưu trữ hình ảnh, bạn cần tạo thư mục này trong dự án của mình
+$duongdan = $duongdan . basename($_FILES["hinhdaidien"]["name"]);
+move_uploaded_file($_FILES["hinhdaidien"]["tmp_name"], $duongdan);
 $hinhdaidien = $duongdan;
 
 // Thêm giảng viên mới vào CSDL

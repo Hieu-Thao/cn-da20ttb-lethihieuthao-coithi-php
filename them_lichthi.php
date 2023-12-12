@@ -1,7 +1,7 @@
 <?php
 include("header_admin.php");
 ?>
-
+<form>
 <div>
     <div class="top-center">
         <p class="top-center-p">Quản lý lịch thi</p>
@@ -13,50 +13,81 @@ include("header_admin.php");
             </div>
         </div>
         <div class="txt-gv-top">
-            <div class="txt-gv-lb">
-                <label>Học kỳ:</label>
-                <select name="hocky">
-                    <option value="hk1" selected="selected">Học kỳ 1</option>
-                    <option value="hk2">Học kỳ 2</option>
-                    <option value="hk3">Học kỳ 3</option>
-                </select>
-            </div>
-            <div class="txt-gv-lb">
-                <label>Lớp:</label>
-                <select name="lop">
-                    <option value="DA20TTB" selected="selected">ĐH Công nghệ thông tin B khóa 2020</option>
-                    <option value="DA20TTA">ĐH Công nghệ thông tin A khóa 2020</option>
-                    <option value="DA20OTA">ĐH Công nghệ ô tô A khóa 2020</option>
-                    <option value="DA20OTB">ĐH Công nghệ ô tô B khóa 2020</option>
-                </select>
-            </div>
-            <div class="txt-gv-lb">
-                <label>Hình thức thi:</label>
-                <select name="hinhthuc">
-                    <option value="TL60" selected="selected">Tự luận - 60'</option>
-                    <option value="TL90">Tự luận - 90'</option>
-                    <option value="TH60">Thực hành - 60'</option>
-                    <option value="TH90">Thực hành - 90'</option>
-                </select>
-            </div>
+            <form enctype="multipart/form-data" action="xuly_them_lichthi.php" name="frmxltl" method="post">
+                <div class="txt-gv-lb">
+                    <label>Mã lịch thi:</label>
+                    <input type="text" name="malichthi"></input>
+                </div>
+                <div class="txt-gv-lb">
+                    <label>Mã học kỳ:</label>
+                    <select name="hocky">
+                        <?php
+                $sql = "SELECT mahocky, tenhocky FROM hocky";
+                $kq = mysqli_query($conn, $sql) or die("Không thể thêm bộ môn: " . mysqli_error($conn));
+                while ($row = mysqli_fetch_assoc($kq)) {
+                    $mahocky = $row['mahocky'];
+                    $tenhocky = $row['tenhocky'];
+                    echo "<option value=\"$mahocky\">$tenhocky</option>";
+                    }
+                ?>
+                    </select>
+                </div>
+                <div class="txt-gv-lb">
+                    <label>Lớp:</label>
+                    <select name="lop">
+                        <?php
+                $sql = "SELECT malop, tenlop FROM lop";
+                $kq = mysqli_query($conn, $sql) or die("Không thể thêm bộ môn: " . mysqli_error($conn));
+                while ($row = mysqli_fetch_assoc($kq)) {
+                    $malop = $row['malop'];
+                    $tenlop = $row['tenlop'];
+                    echo "<option value=\"$malop\">$tenlop</option>";
+                    }
+                ?>
+                    </select>
+                </div>
+                <div class="txt-gv-lb">
+                    <label>Hình thức thi:</label>
+                    <select name="hinhthuc">
+                        <?php
+                $sql = "SELECT mahinhthuc, tenhinhthuc FROM hinhthuc";
+                $kq = mysqli_query($conn, $sql) or die("Không thể thêm bộ môn: " . mysqli_error($conn));
+                while ($row = mysqli_fetch_assoc($kq)) {
+                    $mahinhthuc = $row['mahinhthuc'];
+                    $tenhinhthuc = $row['tenhinhthuc'];
+                    echo "<option value=\"$mahinhthuc\">$tenhinhthuc</option>";
+                    }
+                ?>
+                    </select>
+                </div>
         </div>
         <div class="txt-gv-bot">
             <div class="txt-gv-lb">
                 <label>Năm học:</label>
-                <select name="monhoc">
-                    <option value="1" selected="selected">Năm học 2021 - 2022</option>
-                    <option value="2">Năm học 2022 - 2023</option>
-                    <option value="3">Năm học 2023 - 2024</option>
-                    <option value="4">Năm học 2024 - 2025</option>
+                <select name="namhoc">
+                    <?php
+                $sql = "SELECT manamhoc, tennamhoc FROM namhoc";
+                $kq = mysqli_query($conn, $sql) or die("Không thể thêm bộ môn: " . mysqli_error($conn));
+                while ($row = mysqli_fetch_assoc($kq)) {
+                    $manamhoc = $row['manamhoc'];
+                    $tennamhoc = $row['tennamhoc'];
+                    echo "<option value=\"$manamhoc\">$tennamhoc</option>";
+                    }
+                ?>
                 </select>
             </div>
             <div class="txt-gv-lb">
                 <label>Môn học:</label>
                 <select name="monhoc">
-                    <option value="1" selected="selected">Kỹ thuật lập trình</option>
-                    <option value="2">Kiến trúc máy tính</option>
-                    <option value="3">Điện toán đám mây</option>
-                    <option value="4">Hệ điều hành</option>
+                    <?php
+                $sql = "SELECT mamon, tenmon FROM monhoc";
+                $kq = mysqli_query($conn, $sql) or die("Không thể thêm bộ môn: " . mysqli_error($conn));
+                while ($row = mysqli_fetch_assoc($kq)) {
+                    $mamon = $row['mamon'];
+                    $tenmon = $row['tenmon'];
+                    echo "<option value=\"$mamon\">$tenmon</option>";
+                    }
+                ?>
                 </select>
             </div>
             <div class="txt-gv-lb">
@@ -65,7 +96,7 @@ include("header_admin.php");
             </div>
         </div>
         <div class="txt-gv-bot">
-        <div class="txt-gv-lb">
+            <div class="txt-gv-lb">
                 <label>Ngày thi:</label>
                 <input type="text" name="ngaythi"></input>
             </div>
@@ -82,8 +113,10 @@ include("header_admin.php");
             <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại" />
             <a style="text-decoration: none;" class="txt-btn-huy" type="reset" href="QLLT.php">Hủy bỏ</a>
         </div>
+        </form>
     </div>
 </div>
+</form>
 <?php
 include("footer_admin.php");
 ?>

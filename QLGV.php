@@ -78,8 +78,8 @@ include("header_admin.php");
                     echo "<td>" . $row["email"] . "</td>";
                     echo "<td>" . $row["pass"] . "</td>";
                     echo "<td class='table-icon'>
-                    <a href='sua.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
-                    <a href='xoa.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>
+                    <a href='sua_gv.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
+                    <a href='xoa_gv.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>
                     </td>";
                     echo "</tr>";
                 }

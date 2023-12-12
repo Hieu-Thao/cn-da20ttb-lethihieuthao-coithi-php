@@ -1,7 +1,7 @@
 <?php
 include("header_admin.php");
 ?>
-
+<form>
 <div>
     <div class="top-center">
         <p class="top-center-p">Quản lý giảng viên</p>
@@ -13,6 +13,7 @@ include("header_admin.php");
             </div>
         </div>
         <div class="txt-gv-top">
+        <form enctype="multipart/form-data" action="xuly_them_gv.php" name="frmxlgv" method="post">
             <div class="txt-gv-lb">
                 <label>Mã GV:</label>
                 <input type="text" name="magv"></input>
@@ -28,42 +29,45 @@ include("header_admin.php");
             <div class="txt-gv-lb">
                 <label>Bộ môn:</label>
                 <select name="bomon">
-                    <option value="CNTT" selected="selected">Công nghệ thông tin</option>
-                    <option value="CNOT">Công nghệ ô tô</option>
-                    <option value="CNCK">Công nghệ cơ khí </option>
-                    <option value="CNXD">Công nghệ xây dựng</option>
+                <?php
+                $sql = "SELECT mabomon, tenbomon FROM bomon";
+                $kq = mysqli_query($conn, $sql) or die("Không thể thêm bộ môn: " . mysqli_error($conn));
+                while ($row = mysqli_fetch_assoc($kq)) {
+                    $mabomon = $row['mabomon'];
+                    $tenbomon = $row['tenbomon'];
+                    echo "<option value=\"$mabomon\">$tenbomon</option>";
+                    }
+                ?>
                 </select>
             </div>
         </div>
         <div class="txt-gv-bot">
-            <div class="txt-gv-lb">
+        <div class="txt-gv-lb">
                 <label>Học vị:</label>
-                <select name="hocvi">
-                    <option value="CNTT" selected="selected">Thạc sĩ</option>
-                    <option value="CNOT">Tiến sĩ</option>
-                    <option value="CNCK">Phó giáo sư</option>
-                    <option value="CNXD">Giáo sư</option>
-                </select>
+                <input type="text" name="hocvi"></input>
             </div>
             <div class="txt-gv-lb">
                 <label>Emai:</label>
-                <input type="text" name="emailgv"></input>
+                <input type="text" name="email"></input>
             </div>
             <div class="txt-gv-lb">
                 <label>Mật khẩu:</label>
-                <input type="text" name="mkgv"></input>
+                <input type="text" name="pass"></input>
             </div>
             <div class="txt-gv-lb">
                 <label>Ảnh đại diện:</label>
-                <input type="file" name="hinhanhgv"></input>
+                <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+                <input type="file" name="hinhdaidien"></input>
             </div>
         </div>
         <div class="txt-btn">
-            <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại"/>
+            <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại" />
             <a style="text-decoration: none;" class="txt-btn-huy" type="reset" href="QLGV.php">Hủy bỏ</a>
         </div>
+        </form>
     </div>
 </div>
+</form>
 <?php
 include("footer_admin.php");
 ?>

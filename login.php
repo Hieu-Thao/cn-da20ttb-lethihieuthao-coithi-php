@@ -14,12 +14,13 @@
             justify-content: center;
             align-items: center;
             min-height: 95vh;
+            background-color: #BEC3C8;
         }
     </style>
 </head>
 <body>
     <div class="login_box">
-        <img src="logo_set1.png" alt="Logo">
+        <img src="hinhanh/TVU-SET.png" alt="Logo">
         <h2>QUẢN LÝ CÔNG TÁC COI THI <br> KHOA KỸ THUẬT VÀ CÔNG NGHỆ</h2>
         
             <form action="xulydangnhap.php" name="dangnhap" method="post">
