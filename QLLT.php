@@ -97,7 +97,7 @@ include("header_admin.php");
                     echo "<td> " . $namhoc["tennamhoc"] . "</td>";
                     echo "<td> " . $monhoc["tenmon"] . "</td>";
                     echo "<td> " . $row["tenlichthi"] . "</td>";
-                    echo "<td>" . $row["ngaythi"] . "</td>";
+                    echo "<td>" . date('d/m/Y', strtotime($row["ngaythi"])) . "</td>";
                     echo "<td>" . $row["phongthi"] . "</td>";
                     echo "<td>" . $row["tietthi"] . "</td>";
                     echo "<td class='table-icon'>

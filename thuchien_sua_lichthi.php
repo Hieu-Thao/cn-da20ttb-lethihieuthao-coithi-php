@@ -15,7 +15,7 @@ $phongthi = $_POST["phongthi"];
 $tietthi = $_POST["tietthi"];
 
 // Thêm giảng viên mới vào CSDL
-    $sql = "UPDATE lichthi SET malichthi = '$malichthi', mahocky = '$hocky', malop = '$lop', mahinhthuc = '$hinhthuc', manamhoc = '$namhoc', mamon= '$monhoc', tenlichthi = '$tenlichthi', ngaythi = '$ngaythi', phongthi = '$phongthi', tietthi = '$tietthi' WHERE malichthi = '$malichthi'";
+$sql = "UPDATE lichthi SET malichthi = '$malichthi', mahocky = '$hocky', malop = '$lop', mahinhthuc = '$hinhthuc', manamhoc = '$namhoc', mamon= '$monhoc', tenlichthi = '$tenlichthi', ngaythi = '$ngaythi', phongthi = '$phongthi', tietthi = '$tietthi' WHERE malichthi = '$malichthi'";
     $kq = mysqli_query($conn, $sql) or die("Không thể sửa giảng viên: " . mysqli_error($conn));
 
     echo ("<script language=javascript>

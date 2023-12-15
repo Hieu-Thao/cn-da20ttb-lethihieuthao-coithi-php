@@ -1,7 +1,8 @@
 <?php
 include("header_admin.php");
 ?>
-<form>
+
+<form enctype="multipart/form-data" action="xuly_them_bomon.php" name="frmxlbm" method="post">
 <div>
     <div class="top-center">
         <p class="top-center-p">Quản lý bộ môn</p>
@@ -13,7 +14,6 @@ include("header_admin.php");
             </div>
         </div>
         <div class="txt-gv-top">
-            <form enctype="multipart/form-data" action="xuly_them_bomon.php" name="frmxlbm" method="post">
             <div class="txt-gv-lb">
                     <label>Mã bộ môn: (*)</label>
                     <input type="text" name="mabomon" readonly></input>
@@ -28,7 +28,6 @@ include("header_admin.php");
             <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại" />
             <a style="text-decoration: none;" class="txt-btn-huy" type="reset" href="QLBM.php">Hủy bỏ</a>
         </div>
-        </form>
     </div>
 </div>
 </form>

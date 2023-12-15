@@ -48,8 +48,8 @@ include("header_admin.php");
                     echo "<td>" . $row["manamhoc"] . "</td>";
                     $usern = $row["manamhoc"];
                     echo "<td>" . $row["tennamhoc"] . "</td>";
-                    echo "<td>" . $row["thoigianBD"] . "</td>";
-                    echo "<td>" . $row["thoigianKT"] . "</td>";
+                    echo "<td>" . date('d/m/Y', strtotime($row["thoigianBD"])) . "</td>";
+                    echo "<td>" . date('d/m/Y', strtotime($row["thoigianKT"])) . "</td>";
                     echo "<td class='table-icon'>
                     <a href='sua_namhoc.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
                     <a href='xoa_namhoc.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>

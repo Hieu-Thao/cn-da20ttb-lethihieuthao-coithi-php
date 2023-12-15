@@ -15,7 +15,7 @@ $phongthi = $_POST["phongthi"];
 $tietthi = $_POST["tietthi"];
 
 // Thêm giảng viên mới vào CSDL
-$sql = "INSERT INTO lichthi (malichthi, mahocky, malop, mahinhthuc, manamhoc, mamon, tenlichthi, ngaythi, phongthi, tietthi) VALUES ('$malichthi', '$hocky', '$lop', '$hinhthuc', '$namhoc', '$monhoc', '$tenlichthi', '$ngaythi', '$phongthi', '$tietthi' )";
+$sql = "INSERT INTO lichthi (malichthi, mahocky, malop, mahinhthuc, manamhoc, mamon, tenlichthi, ngaythi, phongthi, tietthi) VALUES ('$malichthi', '$hocky', '$lop', '$hinhthuc', '$namhoc', '$monhoc', '$tenlichthi', '$ngaythi', '$phongthi', '$tietthi')";
 $kq = mysqli_query($conn, $sql) or die("Không thể thêm giảng viên: " . mysqli_error($conn));
 
 echo "<script language=javascript>
