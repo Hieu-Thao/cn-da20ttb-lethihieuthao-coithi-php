@@ -127,7 +127,7 @@ $row = mysqli_fetch_array($kq);
             <div class="txt-gv-bot">
                 <div class="txt-gv-lb">
                     <label>Ngày thi:</label>
-                    <input type="text" name="ngaythi" value="<?php echo $row["ngaythi"]; ?>"></input>
+                    <input type="date" name="ngaythi" value="<?php echo $row["ngaythi"]; ?>"></input>
                 </div>
                 <div class="txt-gv-lb">
                     <label>Phòng thi:</label>

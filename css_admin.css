@@ -275,8 +275,21 @@ html {
 
 .cdm {
     display: flex;
-    padding: 10px 0;
+    padding: 7px 0;
     margin-left: 20px;
+}
+
+.cdm-tg input{
+    display: flex;
+    margin: 5px 0px;
+    align-content: flex-end;
+}
+
+.cdm-tg button{
+    /* background-color: #b8b8b8; */
+    padding: 3px;
+    border-radius: 5px;
+    border: 1px solid black;
 }
 
 table, th, td {
@@ -303,33 +316,6 @@ table, th, td {
     display: flex;
     align-items: center;
     font-size: 18px;
-}
-
-.sotrang {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    /* Điều chỉnh khoảng cách trên trang nếu cần */
-}
-
-.sotrang {
-    font-weight: bold;
-    gap: 10px;
-}
-
-.sotrang a {
-    text-decoration: none;
-    color: #004172;
-}
-
-.sotrang a.active {
-    background-color: #FFCC70;
-    color: #000000;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-right: 5px;
-    text-decoration: none;
 }
 
 
@@ -368,6 +354,8 @@ table, th, td {
     flex-direction: column;
     font-weight: 600;
 }
+
+
 
 .txt-gv-lb input {
     width: 220px;
