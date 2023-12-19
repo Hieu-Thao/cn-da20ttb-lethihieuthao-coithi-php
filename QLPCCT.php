@@ -27,18 +27,21 @@ include("header_admin.php");
         </div>
         <div class="cdm">
             <form method="get" action="">
-                
+
                 <div class="cdm-tg">
                     <label for="ngayBD">Từ ngày:</label>
                     <input type="date" name="ngayBD" id="ngayBD">
                 </div>
                 <div class="cdm-tg">
                     <label for="ngayKT">Đến ngày:</label>
-                    <input type="date" name="ngayKT" id="ngayKT">
-                    <button type="submit">Lọc</button>
+                    <div class="cdm-tg-btn">
+                        <input type="date" name="ngayKT" id="ngayKT">
+                        <button type="submit">Lọc</button>
+                    </div>
+
                 </div>
-                
-                
+
+
             </form>
         </div>
         <div class="table">
@@ -62,13 +65,13 @@ include("header_admin.php");
                     // Lấy giá trị ngày từ biểu mẫu (nếu có)
                     $ngayBD = isset($_GET["ngayBD"]) ? $_GET["ngayBD"] : "";
                     $ngayKT = isset($_GET["ngayKT"]) ? $_GET["ngayKT"] : "";
-                
+
                     // Xây dựng điều kiện lọc theo ngày (nếu có ngày được chọn)
                     $dateCondition = "";
                     if (!empty($ngayBD) && !empty($ngayKT)) {
                         $dateCondition = "AND lt.ngaythi BETWEEN '$ngayBD' AND '$ngayKT'";
                     }
-                
+
                     // Thực hiện truy vấn với điều kiện lọc (hoặc không có điều kiện)
                     $sql = "SELECT lt.*, gv.hotengv, hk.tenhocky, l.tenlop, nh.tennamhoc, mh.tenmon
                             FROM lichthi lt
@@ -79,29 +82,29 @@ include("header_admin.php");
                             LEFT JOIN namhoc nh ON lt.manamhoc = nh.manamhoc
                             LEFT JOIN monhoc mh ON lt.mamon = mh.mamon
                             WHERE 1 $dateCondition";
-                
+
                     $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người dùng " . mysqli_error());
 
-                while ($row = mysqli_fetch_array($kq)) {
-                    echo "<tr>";
-                    echo "<td> " . $row["malichthi"] . "</td>"; 
-                    $usern = $row["malichthi"];
-                    echo "<td> " . $row["tenlichthi"] . "</td>";
-                    echo "<td> " . $row["hotengv"] . "</td>";
-                    echo "<td> " . $row["tenhocky"] . "</td>";
-                    echo "<td> " . $row["tenlop"] . "</td>";
-                    echo "<td> " . $row["tennamhoc"] . "</td>";
-                    echo "<td> " . $row["tenmon"] . "</td>";
-                    echo "<td>" . date('d/m/Y', strtotime($row["ngaythi"])) . "</td>";
-                    echo "<td> " . $row["tietthi"] . "</td>";
-                    echo "<td class='table-icon'>
+                    while ($row = mysqli_fetch_array($kq)) {
+                        echo "<tr>";
+                        echo "<td> " . $row["malichthi"] . "</td>";
+                        $usern = $row["malichthi"];
+                        echo "<td> " . $row["tenlichthi"] . "</td>";
+                        echo "<td> " . $row["hotengv"] . "</td>";
+                        echo "<td> " . $row["tenhocky"] . "</td>";
+                        echo "<td> " . $row["tenlop"] . "</td>";
+                        echo "<td> " . $row["tennamhoc"] . "</td>";
+                        echo "<td> " . $row["tenmon"] . "</td>";
+                        echo "<td>" . date('d/m/Y', strtotime($row["ngaythi"])) . "</td>";
+                        echo "<td> " . $row["tietthi"] . "</td>";
+                        echo "<td class='table-icon'>
                         <a href='sua_pcgv.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
                         <a href='xoa.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>
                         </td>";
-                    echo "</tr>";
+                        echo "</tr>";
+                    }
                 }
-            }
-        ?>
+                ?>
             </table>
         </div>
     </div>

@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.link-tvu{
+    background-color: white;
+    height: 35px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 30px;
+    border-top: 2px solid #F15B2A;
+}
+
+.link-tvu a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0px 15px;
+    text-decoration: none;
+    color: black;
+}
+
+.link-tvu a:hover {
+    /* padding: 0px 15px; */
+    text-decoration: none;
+    color: white;
+    background-color: #F15B2A;
+    font-weight: 500;
+    
+}
+
+.menu{
+    background-color: #094877;
+    height: 45px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 30px;
+    font-weight: 400;
+}
+
+.menu a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0px 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 19px;
+}
+
+.menu a:hover {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border-left: 2px solid #F15B2A;
+    border-right: 2px solid #F15B2A;
+    font-weight: 600;
+}
+
+.tintuc{
+    display: flex;
+    margin-top: 10px;
+}
+
+.tintuc-left{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-top: 20px;
+    align-items: center;
+
+}
+
+.tintuc-left-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 630px;
+    height: 320px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.tintuc-left-img > img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tintuc-right-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 230px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.tintuc-right-img > img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tintuc-right{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+    margin-right: 15px;
+}
+
+.tt{
+    display: flex;
+    gap: 15px;
+}
+
+.tt-text{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.tt-text1{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0px 30px;
+    gap:5px;
+}
+
+.tt-text1, .tt-text label{
+    color: #F15B2A;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.tt-text1 a, .tt-text a{
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    margin-top: 7px;
+}
+
+.ctdt{
+    padding: 50px 0px;
+    font-size: 25px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.full-ctdt{
+    display: flex;
+    padding: 0px 80px;
+    gap: 15px;
+
+}
+
+.ctdt-left-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.ctdt-left-img > img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ctdt-right-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.ctdt-right-img > img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ctdt-left{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 50px ;
+    
+}
+
+.ctdt-right{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 20px;
+    padding-right: 50px ;
+}
+
+.ctdt-text{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.ctdt-text a{
+    text-decoration: none;
+    font-weight: 700;
+    color: #F15B2A;
+}
+
+.doitac label{
+    padding: 40px 0px;
+    font-size: 25px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.dt-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 65px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.dt-img > img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dt-full-img{
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.footer{
+    background-color: #094877;
+    height: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+
+.tdgt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
+}
+
+.full-gt{
+    padding: 0px 60px;
+}
+
+.gt-text label{
+    display: flex;
+    font-size: 18px;
+    text-align: justify;
+    padding-bottom: 20px;
+}
+
+.notegt{
+    font-style: italic;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.td-ts{
+    font-size: 25px;
+    padding: 30px 0px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.nganh{
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    width: 90%;;
+
+}
+
+.tt-nganh{
+    padding: 10px 40px;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    gap: 10px;
+    
+}
+
+.full-ts{
+    display: flex;
+    justify-content: center;
+}
+
+.full-tintuc{
+    padding: 0px 80px;
+
+}
+
+.td-tin{
+    color: #F15B2A;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 20px 0px;
+}
+
+.tt1-img img{
+    display: block;
+    width: 1000px;
+    height: 600px;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+.tt-tintuc1{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    font-size: 18px;
+    text-align: justify;
+    margin-top: 10px;
+}

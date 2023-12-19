@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Nếu chưa có phân công, thực hiện INSERT
         $insertsql = "INSERT INTO phancongcoithi (malichthi, magv) VALUES ('$malichthi', '$giangvien')";
-        $insertkq = mysqli_query($conn, $insertSql);
+        $insertkq = mysqli_query($conn, $insertsql);
 
         if ($insertkq) {
             echo ("<script language=javascript>
