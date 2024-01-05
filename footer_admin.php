@@ -2,7 +2,7 @@
                 <!-- foter -->
                 </div>
             <div class="footer">
-                <p>Bản quyền thuộc @Hithaoz</p>
+                <p>&copy; Design by Hithaoz</p>
             </div>
         </div>
     </div>

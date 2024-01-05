@@ -90,12 +90,12 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                             onchange="this.form.submit()">
                     </div>
                     <div>
-                        <select name="tinhtrang" onchange="this.form.submit()">
-                            <option value="">--Chọn trạng thái --</option>
-                            <option value="Tất cả">Tất cả</option>
-                            <option value="Chờ duyệt">Chờ duyệt</option>
-                            <option value="Đã duyệt">Đã duyệt</option>
-                        </select>
+                    <select name="tinhtrang" onchange="this.form.submit()">
+                        <option value="Tất cả" <?php echo (isset($_GET['tinhtrang']) && $_GET['tinhtrang'] === 'Tất cả') ? 'selected' : ''; ?>>Tất cả</option>
+                        <option value="Chờ duyệt" <?php echo (isset($_GET['tinhtrang']) && $_GET['tinhtrang'] === 'Chờ duyệt') ? 'selected' : ''; ?>>Chờ duyệt</option>
+                        <option value="Đã duyệt" <?php echo (isset($_GET['tinhtrang']) && $_GET['tinhtrang'] === 'Đã duyệt') ? 'selected' : ''; ?>>Đã duyệt</option>
+                    </select>
+
                     </div>
                 </div>
             </div>
@@ -114,12 +114,13 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                         </button></td>
                     <td width="5%">Tiết thi</td>
                     <td width="5%">Thời gian</td>
+                    <td width="5%">Đơn giá</td>
                     <td width="10%">Tình trạng</td>
                     <td width="10%">Tính năng</td>
                 </tr>
                 <?php
                     // Thực hiện truy vấn với điều kiện lọc (hoặc không có điều kiện)
-                    $sql = "SELECT lt.*, gv.hotengv, hk.tenhocky, l.tenlop, nh.tennamhoc, mh.tenmon, ht.thoigian, pcc.tinhtrang
+                    $sql = "SELECT lt.*, gv.hotengv, hk.tenhocky, l.tenlop, nh.tennamhoc, mh.tenmon, ht.thoigian, ht.dongia, pcc.tinhtrang
                             FROM lichthi lt
                             LEFT JOIN phancongcoithi pcc ON lt.malichthi = pcc.malichthi
                             LEFT JOIN giangvien gv ON pcc.magv = gv.magv
@@ -129,23 +130,25 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                             LEFT JOIN monhoc mh ON lt.mamon = mh.mamon
                             LEFT JOIN hinhthuc ht ON lt.mahinhthuc = ht.mahinhthuc
                             WHERE 1 $dateCondition";
-
-        $kq = mysqli_query($conn, $sql) or die("Không thể truy xuất dữ liệu " . mysqli_error($conn));
-
-
-                    while ($row = mysqli_fetch_array($kq)) {
+                                if (isset($_GET['tinhtrang']) && $_GET['tinhtrang'] !== '' && $_GET['tinhtrang'] !== 'Tất cả') {
+                                    $selectedTinhTrang = $_GET['tinhtrang'];
+                                    $sql .= " AND pcc.tinhtrang = '$selectedTinhTrang'";
+                                }
+                                $kq = mysqli_query($conn, $sql) or die("Không thể truy xuất dữ liệu " . mysqli_error($conn));
+                                while ($row = mysqli_fetch_array($kq)) {
                         echo "<tr>";
                         echo "<td> " . $row["malichthi"] . "</td>";
                         $usern = $row["malichthi"];
                         echo "<td> " . $row["tenlichthi"] . "</td>";
                         echo "<td> " . $row["hotengv"] . "</td>";
                         // echo "<td> " . $row["tenhocky"] . "</td>";
-                        echo "<td> " . $row["malop"] . "</td>";
+                        echo "<td> " . $row["malop"] . "</td>";  
                         // echo "<td> " . $row["tennamhoc"] . "</td>";
                         echo "<td> " . $row["tenmon"] . "</td>";
                         echo "<td>" . date('d/m/Y', strtotime($row["ngaythi"])) . "</td>";
                         echo "<td> " . $row["tietthi"] . "</td>";
                         echo "<td> " . $row["thoigian"] . "</td>";
+                        echo "<td> " . $row["dongia"] . "</td>";
                         echo "<td";
                             if ($row["tinhtrang"] == "Chờ duyệt") {
                                 echo " style='color: red; font-weight: 600;'"; // Nếu trạng thái là 'Chờ duyệt', thêm màu đỏ cho chữ

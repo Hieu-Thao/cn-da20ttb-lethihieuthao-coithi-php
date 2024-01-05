@@ -384,7 +384,6 @@ table, th, td {
 
 .txt-btn {
     display: flex;
-    display: flex;
     justify-content: center;
     gap: 20px;
     margin-top: 30px;
@@ -441,4 +440,64 @@ table, th, td {
 
 .fullloc select{
     height: 21px;
+}
+
+.loc-thang{
+    margin-bottom: 10px;
+    padding: 0px 35px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.loc-thang ion-icon{
+    display: flex;
+    align-items: center;
+}
+
+.loc-thang select, input{
+    height: 30px;
+    padding: 0px 5px;
+}
+
+.tk1{
+    background-color: #AE445A;
+    padding: 10px 10px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.tk2{
+    background-color: #395B64;
+    padding: 10px 10px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.tk3{
+    background-color: #A27B5C;
+    padding: 10px 10px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.tk{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    /* margin: 0 auto; */
+    padding: 200px 0px;
+}
+
+.tk a{
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
 }

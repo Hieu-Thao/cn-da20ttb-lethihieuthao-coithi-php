@@ -12,20 +12,11 @@ include("header_admin.php");
                     <ion-icon name="add-outline"></ion-icon>
                     <p>Thêm bộ môn</p>
                 </a>
-                <a href="#" class="button button-in">
-                    <ion-icon name="print-outline"></ion-icon>
-                    <p>In dữ liệu</p>
-                </a>
-                <a href="#" class="button button-xtt">
-                    <ion-icon name="trash-outline"></ion-icon>
-                    <p>Xóa tất cả</p>
-                </a>
             </div>
         </div>
         <div class="table">
             <table width="65%" class="table-content">
-                <tr style="background-color:#CDD0CB; font-weight:600;">
-                    <td width="5%" height="40px"><input type="checkbox"></td>
+                <tr style="background-color:#CDD0CB; font-weight:600; height:40px;">
                     <td width="10%">Mã bộ môn</td>
                     <td width="35%">Tên bộ môn</td>
                     <td width="15%">Tính năng</td>
@@ -35,8 +26,7 @@ include("header_admin.php");
                 $sql = "select * from bomon";
                 $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người dùng " . mysqli_error());
                 while ($row = mysqli_fetch_array($kq)) {
-                    echo "<tr>";
-                    echo "<td height='40px'><input type='checkbox'></td>";
+                    echo "<tr style='height:40px;'>";
                     echo "<td>" . $row["mabomon"] . "</td>";
                     $usern = $row["mabomon"];
                     echo "<td>" . $row["tenbomon"] . "</td>";

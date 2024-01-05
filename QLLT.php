@@ -6,8 +6,8 @@ function sortTableByDate() {
     var rows = Array.from(table.rows).slice(1); // Bỏ qua hàng tiêu đề
 
     rows.sort(function(a, b) {
-        var dateA = new Date(parseDate(a.cells[8].textContent));
-        var dateB = new Date(parseDate(b.cells[8].textContent));
+        var dateA = new Date(parseDate(a.cells[7].textContent));
+        var dateB = new Date(parseDate(b.cells[7].textContent));
 
         return dateB - dateA; // Sắp xếp giảm dần theo ngày thi
     });
@@ -28,8 +28,6 @@ function parseDate(dateString) {
     var parts = dateString.split("/");
     return new Date(parts[2], parts[1] - 1, parts[0]);
 }
-
-
 </script>
 
 <?php
@@ -47,42 +45,17 @@ include("header_admin.php");
                     <ion-icon name="add-outline"></ion-icon>
                     <p>Thêm lịch thi</p>
                 </a>
-                <a href="#" class="button button-in">
-                    <ion-icon name="print-outline"></ion-icon>
-                    <p>In dữ liệu</p>
-                </a>
-                <a href="#" class="button button-xtt">
-                    <ion-icon name="trash-outline"></ion-icon>
-                    <p>Xóa tất cả</p>
-                </a>
             </div>
-            <div class="btn-center-search">
-                <input type="text" name="tendn" placeholder="Tìm kiếm" required>
-                <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
-            </div>
-        </div>
-        <div class="cdm">
-            <form method="get" action="" id="pagination-form">
-                <label for="itemsPerPage">Số lượng:</label>
-                <select name="itemsPerPage" id="itemsPerPage" onchange="updateResultsPerPage()">
-                    <option value="2">--chọn--</option>
-                    <option value="2">2</option>
-                    <option value="4">4</option>
-                    <option value="6">6</option>
-                    <option value="10">10</option>
-                </select>
-            </form>
         </div>
         <div class="table">
             <table width="100%" class="table-content">
-                <tr style="background-color:#CDD0CB; font-weight:600;">
-                    <td width="3%"><input type="checkbox"></td>
+                <tr style="background-color:#CDD0CB; font-weight:600; height:40px;">
                     <td width="5%">Mã lịch thi</td>
-                    <td width="7%">Mã <br>học kỳ</td>
-                    <td width="15%">Mã lớp</td>
-                    <td width="10%">Mã<br> hình thức</td>
-                    <td width="10%">Mã năm học</td>
-                    <td width="10%">Mã môn</td>
+                    <td width="7%">Học kỳ</td>
+                    <td width="5%">Mã lớp</td>
+                    <td width="10%">Hình thức</td>
+                    <td width="10%">Năm học</td>
+                    <td width="15%">Môn học</td>
                     <td width="10%">Tên lịch thi</td>
                     <td width="10%">Ngày thi &nbsp;<button onclick="sortTableByDate()"><ion-icon name="caret-up-outline"></ion-icon></button></td>
                     <td width="7%">Phòng thi</td>
@@ -124,12 +97,11 @@ include("header_admin.php");
                     $kq6 = mysqli_query($conn, $sql6) or die("Không thể xuất thông tin người dùng " . mysqli_error());
                     $monhoc = mysqli_fetch_array($kq6);
 
-                    echo "<tr>";
-                    echo "<td><input type='checkbox'></td>";
+                    echo "<tr style='height:50px;'>";
                     echo "<td> " . $row["malichthi"] . "</td>";
                     $usern = $row["malichthi"];
                     echo "<td> " . $hocky["tenhocky"] . "</td>";
-                    echo "<td> " . $lop["tenlop"] . "</td>";
+                    echo "<td> " . $lop["malop"] . "</td>";
                     echo "<td> " . $hinhthuc["hinhthucthi"] . "</td>";
                     echo "<td> " . $namhoc["tennamhoc"] . "</td>";
                     echo "<td> " . $monhoc["tenmon"] . "</td>";
