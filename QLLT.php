@@ -1,3 +1,37 @@
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
+<script>
+function sortTableByDate() {
+    var table = document.querySelector('.table-content');
+    var rows = Array.from(table.rows).slice(1); // Bỏ qua hàng tiêu đề
+
+    rows.sort(function(a, b) {
+        var dateA = new Date(parseDate(a.cells[8].textContent));
+        var dateB = new Date(parseDate(b.cells[8].textContent));
+
+        return dateB - dateA; // Sắp xếp giảm dần theo ngày thi
+    });
+
+    // Xóa dữ liệu đã sắp xếp khỏi bảng
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+
+    // Thêm dữ liệu đã sắp xếp lại vào bảng
+    rows.forEach(function(row) {
+        table.appendChild(row);
+    });
+}
+
+function parseDate(dateString) {
+    // Hàm chuyển đổi chuỗi ngày thành đối tượng ngày
+    var parts = dateString.split("/");
+    return new Date(parts[2], parts[1] - 1, parts[0]);
+}
+
+
+</script>
+
 <?php
 include("header_admin.php");
 ?>
@@ -50,15 +84,18 @@ include("header_admin.php");
                     <td width="10%">Mã năm học</td>
                     <td width="10%">Mã môn</td>
                     <td width="10%">Tên lịch thi</td>
-                    <td width="10%">Ngày thi</td>
+                    <td width="10%">Ngày thi &nbsp;<button onclick="sortTableByDate()"><ion-icon name="caret-up-outline"></ion-icon></button></td>
                     <td width="7%">Phòng thi</td>
                     <td width="5%">Tiết thi</td>
+                    <td width="5%">Thời gian</td>
                     <td width="10%">Tính năng</td>
                 </tr>
                 <?php
                 include("ketnoi.php");
 
-                $sql = "SELECT * FROM lichthi";
+                $sql = "SELECT lichthi.*, hinhthuc.thoigian
+                        FROM lichthi
+                        INNER JOIN hinhthuc ON lichthi.mahinhthuc = hinhthuc.mahinhthuc";
                 $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người dùng " . mysqli_error());
                 while ($row = mysqli_fetch_array($kq)) {
 
@@ -93,13 +130,14 @@ include("header_admin.php");
                     $usern = $row["malichthi"];
                     echo "<td> " . $hocky["tenhocky"] . "</td>";
                     echo "<td> " . $lop["tenlop"] . "</td>";
-                    echo "<td> " . $hinhthuc["tenhinhthuc"] . "</td>";
+                    echo "<td> " . $hinhthuc["hinhthucthi"] . "</td>";
                     echo "<td> " . $namhoc["tennamhoc"] . "</td>";
                     echo "<td> " . $monhoc["tenmon"] . "</td>";
                     echo "<td> " . $row["tenlichthi"] . "</td>";
                     echo "<td>" . date('d/m/Y', strtotime($row["ngaythi"])) . "</td>";
                     echo "<td>" . $row["phongthi"] . "</td>";
                     echo "<td>" . $row["tietthi"] . "</td>";
+                    echo "<td>" . $row["thoigian"] . "</td>";
                     echo "<td class='table-icon'>
                     <a href='sua_lichthi.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
                     <a href='xoa_lichthi.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>

@@ -19,7 +19,7 @@ $sql = "INSERT INTO lichthi (malichthi, mahocky, malop, mahinhthuc, manamhoc, ma
 $kq = mysqli_query($conn, $sql) or die("Không thể thêm giảng viên: " . mysqli_error($conn));
 
 echo "<script language=javascript>
-        alert('Thêm bộ môn thành công');
+        alert('Thêm lịch thi thành công');
         window.location='QLLT.php';
     </script>";
 ?>

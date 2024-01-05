@@ -23,7 +23,7 @@
         <div class="menu">
             <a href="index.php">Trang chủ</a>
             <a href="gioithieu.php">Giới thiệu</a>
-            <a href="#">Lịch thi</a>
+            <a href="lichthi.php">Lịch thi</a>
             <a href="tuyensinh.php">Tuyển sinh</a>
             <a href="login.php">Đăng nhập</a>
         </div>

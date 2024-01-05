@@ -13,6 +13,7 @@ $tenlichthi = $_POST["tenlichthi"];
 $ngaythi = $_POST["ngaythi"];
 $phongthi = $_POST["phongthi"];
 $tietthi = $_POST["tietthi"];
+// $thoigian = $_POST["thoigian"];
 
 // Thêm giảng viên mới vào CSDL
 $sql = "UPDATE lichthi SET malichthi = '$malichthi', mahocky = '$hocky', malop = '$lop', mahinhthuc = '$hinhthuc', manamhoc = '$namhoc', mamon= '$monhoc', tenlichthi = '$tenlichthi', ngaythi = '$ngaythi', phongthi = '$phongthi', tietthi = '$tietthi' WHERE malichthi = '$malichthi'";

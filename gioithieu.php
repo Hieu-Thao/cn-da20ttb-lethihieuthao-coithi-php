@@ -5,7 +5,7 @@ include("header.php");
 <div class="full-gt">
     <div class="tdgt">
         <p style="margin-top: 20px; font-weight:500">Giới thiệu khoa</p>
-        <p style="color: #F15B2A; font-weight: 700; margin-bottom:20px; font-size:25px;">KHOA KỸ THUẬT VÀ CÔNG NGHỆ, THÀNH TỰU PHÁT TRIỂN</ơ>
+        <p style="color: #F15B2A; font-weight: 700; margin-bottom:20px; font-size:25px;">KHOA KỸ THUẬT VÀ CÔNG NGHỆ, THÀNH TỰU PHÁT TRIỂN</p>
     </div>
 
     <div class="gt-text">

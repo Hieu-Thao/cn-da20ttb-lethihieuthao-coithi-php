@@ -431,3 +431,14 @@ table, th, td {
     color: #ffffff;
     border: none;
 }
+
+.fullloc{
+    display: flex;
+    gap: 20px;
+    /* flex-direction: column; */
+    align-items: center;
+}
+
+.fullloc select{
+    height: 21px;
+}

@@ -5,7 +5,11 @@ include("ketnoi.php");
 
 $usern = $_GET["user"];
 
-$sql = "SELECT * FROM lichthi WHERE malichthi = '".$usern."'";
+$sql = "SELECT lichthi.*, hinhthuc.thoigian
+        FROM lichthi
+        INNER JOIN hinhthuc ON lichthi.mahinhthuc = hinhthuc.mahinhthuc
+        WHERE lichthi.malichthi = '".$usern."'";
+
 $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin bộ môn " . mysqli_error());
 $row = mysqli_fetch_array($kq);
 ?>
@@ -38,7 +42,6 @@ $row = mysqli_fetch_array($kq);
             $tenhocky = $hocky_row['tenhocky'];
             $selected = ($mahocky == $row["mahocky"]) ? "selected" : "";
             echo "<option value=\"$mahocky\" $selected>$tenhocky</option>";
-
         }
         ?>
                     </select>
@@ -136,6 +139,10 @@ $row = mysqli_fetch_array($kq);
                 <div class="txt-gv-lb">
                     <label>Tiết thi:</label>
                     <input type="text" name="tietthi" value="<?php echo $row["tietthi"]; ?>"></input>
+                </div>
+                <div class="txt-gv-lb">
+                    <label>Thời gian:</label>
+                    <input type="text" name="thoigian" value="<?php echo $row["thoigian"]; ?>" readonly></input>
                 </div>
             </div>
             <div class="txt-btn">

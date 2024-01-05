@@ -112,6 +112,10 @@ include("header_admin.php");
                     <label>Tiết thi:</label>
                     <input type="text" name="tietthi"></input>
                 </div>
+                <!-- <div class="txt-gv-lb">
+                    <label>Thời gian:</label>
+                    <input type="text" name="thoigian"></input>
+                </div> -->
             </div>
             <div class="txt-btn">
                 <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại" />

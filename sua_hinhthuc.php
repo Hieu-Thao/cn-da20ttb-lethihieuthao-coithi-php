@@ -28,36 +28,14 @@ $row = mysqli_fetch_array($kq);
                 </div>
                 <div class="txt-gv-lb">
                     <label>Tên hình thức:</label>
-                    <select name="tenhinhthuc">
-                        <option value="Tự luận"
-                            <?php echo ($row["tenhinhthuc"] == "Tự luận") ? "selected" : ""; ?>>Tự luận</option>
-                        <option value="Thực hành"
-                            <?php echo ($row["tenhinhthuc"] == "Thực hành") ? "selected" : ""; ?>>Thực hành</option>
-                            <option value="Báo cáo"
-                            <?php echo ($row["tenhinhthuc"] == "Báo cáo") ? "selected" : ""; ?>>Báo cáo</option>
-                        <!-- Thêm các option khác tương tự -->
-                    </select>
-                </div>
-                <div class="txt-gv-lb">
-                    <label>Thời gian:</label>
-                    <input type="text" name="thoigian" value="<?php echo $row["thoigian"]; ?>"></input>
+                    <input type="text" name="tenhinhthuc" value="<?php echo $row["tenhinhthuc"]; ?>"></input>
                 </div>
             </div>
-            <div class="txt-gv-bot">
-                <div class="txt-gv-lb">
-                    <label>Buổi:</label>
-                    <input type="text" name="buoi" value="<?php echo $row["buoi"]; ?>"></input>
+                <div class="txt-btn">
+                    <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại" />
+                    <a style="text-decoration: none;" class="txt-btn-huy" type="reset" href="QLHT.php">Hủy bỏ</a>
                 </div>
-                <div class="txt-gv-lb">
-                    <label>Đơn giá:</label>
-                    <input type="text" name="dongia" value="<?php echo $row["dongia"]; ?>"></input>
-                </div>
-            </div>
-
-            <div class="txt-btn">
-                <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại" />
-                <a style="text-decoration: none;" class="txt-btn-huy" type="reset" href="QLHT.php">Hủy bỏ</a>
-            </div>
+            
         </div>
     </div>
 </form>

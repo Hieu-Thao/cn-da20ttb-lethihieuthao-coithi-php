@@ -7,7 +7,7 @@
 
     echo "<script language=javascript>
         alert('Bạn đã thoát ra khỏi hệ thống!');
-        window.location='login.php';
+        window.location='index.php';
         </script> ";
     exit();
 ?>
