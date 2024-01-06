@@ -13,24 +13,11 @@ include("header_admin.php");
                     <ion-icon name="add-outline"></ion-icon>
                     <p>Thêm năm học</p>
                 </a>
-                <a href="#" class="button button-in">
-                    <ion-icon name="print-outline"></ion-icon>
-                    <p>In dữ liệu</p>
-                </a>
-                <a href="#" class="button button-xtt">
-                    <ion-icon name="trash-outline"></ion-icon>
-                    <p>Xóa tất cả</p>
-                </a>
-            </div>
-            <div class="btn-center-search">
-                <input type="text" name="tendn" placeholder="Tìm kiếm" required>
-                <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
             </div>
         </div>
         <div class="table">
             <table width="90%" class="table-content">
-                <tr style="background-color:#CDD0CB; font-weight:600;">
-                    <td width="5%" height="40px"><input type="checkbox"></td>
+                <tr style="background-color:#CDD0CB; font-weight:600; height:40px;">
                     <td width="15%">Mã năm học</td>
                     <td width="25%">Tên năm học</td>
                     <td width="20%">Thời gian bắt đầu</td>
@@ -43,8 +30,7 @@ include("header_admin.php");
                 $sql = "SELECT * FROM namhoc";
                 $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người dùng " . mysqli_error());
                 while ($row = mysqli_fetch_array($kq)) {
-                    echo "<tr>";
-                    echo "<td height='40px'><input type='checkbox'></td>";
+                    echo "<tr style='height:40px;'>";
                     echo "<td>" . $row["manamhoc"] . "</td>";
                     $usern = $row["manamhoc"];
                     echo "<td>" . $row["tennamhoc"] . "</td>";

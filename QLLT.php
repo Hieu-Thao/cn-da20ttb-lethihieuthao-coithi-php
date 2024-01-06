@@ -28,7 +28,36 @@ function parseDate(dateString) {
     var parts = dateString.split("/");
     return new Date(parts[2], parts[1] - 1, parts[0]);
 }
+
+
+// 
+
+function filterTable() {
+    var table = document.querySelector('.table-content');
+    var rows = Array.from(table.rows).slice(1); // Bỏ qua hàng tiêu đề
+
+    var filterStatus = document.getElementById('filter_status').value;
+
+    rows.forEach(function(row) {
+        var date = new Date(parseDate(row.cells[7].textContent));
+
+        if ((filterStatus === 'da_thi' && date < new Date(new Date().setDate(new Date().getDate() - 1))) || (filterStatus === 'sap_thi' && date >= new Date(new Date().setDate(new Date().getDate() - 1)))) {
+            row.style.display = '';
+        } else if (filterStatus === 'all') {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+
+
 </script>
+
+
+
+
 
 <?php
 include("header_admin.php");
@@ -46,6 +75,16 @@ include("header_admin.php");
                     <p>Thêm lịch thi</p>
                 </a>
             </div>
+            <div>
+                <!-- Add this select dropdown within your HTML form -->
+            <select id="filter_status" name="filter_status" onchange="filterTable()">
+                <option value="all">Tất cả</option>
+                <option value="da_thi">Đã thi</option>
+                <option value="sap_thi">Sắp thi</option>
+            </select>
+            </div>
+            
+
         </div>
         <div class="table">
             <table width="100%" class="table-content">
@@ -57,7 +96,9 @@ include("header_admin.php");
                     <td width="10%">Năm học</td>
                     <td width="15%">Môn học</td>
                     <td width="10%">Tên lịch thi</td>
-                    <td width="10%">Ngày thi &nbsp;<button onclick="sortTableByDate()"><ion-icon name="caret-up-outline"></ion-icon></button></td>
+                    <td width="10%">Ngày thi &nbsp;<button onclick="sortTableByDate()">
+                            <ion-icon name="caret-up-outline"></ion-icon>
+                        </button></td>
                     <td width="7%">Phòng thi</td>
                     <td width="5%">Tiết thi</td>
                     <td width="5%">Thời gian</td>
@@ -66,45 +107,40 @@ include("header_admin.php");
                 <?php
                 include("ketnoi.php");
 
-                $sql = "SELECT lichthi.*, hinhthuc.thoigian
-                        FROM lichthi
-                        INNER JOIN hinhthuc ON lichthi.mahinhthuc = hinhthuc.mahinhthuc";
+                $statusCondition = '';
+
+                if (isset($_GET['filter_status']) && $_GET['filter_status'] !== 'all') {
+                    $filterStatus = $_GET['filter_status'];
+
+                    if ($filterStatus === 'da_thi') {
+                        $statusCondition = "AND lt.ngaythi < DATE_SUB(CURDATE(), INTERVAL 1 DAY)";
+                    } elseif ($filterStatus === 'sap_thi') {
+                        $statusCondition = "AND lt.ngaythi >= DATE_ADD(CURDATE(), INTERVAL 1 DAY)";
+                    }
+            }
+
+
+                $sql = "SELECT lt.*, gv.hotengv, hk.tenhocky, l.tenlop, nh.tennamhoc, mh.tenmon, ht.thoigian, ht.dongia, ht.hinhthucthi, pcc.tinhtrang
+        FROM lichthi lt
+        LEFT JOIN phancongcoithi pcc ON lt.malichthi = pcc.malichthi
+        LEFT JOIN giangvien gv ON pcc.magv = gv.magv
+        LEFT JOIN hocky hk ON lt.mahocky = hk.mahocky
+        LEFT JOIN lop l ON lt.malop = l.malop
+        LEFT JOIN namhoc nh ON lt.manamhoc = nh.manamhoc
+        LEFT JOIN monhoc mh ON lt.mamon = mh.mamon
+        LEFT JOIN hinhthuc ht ON lt.mahinhthuc = ht.mahinhthuc
+        WHERE 1 $statusCondition";
                 $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người dùng " . mysqli_error());
                 while ($row = mysqli_fetch_array($kq)) {
-
-                    $hockys = $row["mahocky"];
-                    $sql2 = "SELECT * FROM hocky WHERE mahocky='" . $hockys . "'";
-                    $kq2 = mysqli_query($conn, $sql2) or die("Không thể xuất thông tin người dùng " . mysqli_error());
-                    $hocky = mysqli_fetch_array($kq2);
-
-                    $lops = $row["malop"];
-                    $sql3 = "SELECT * FROM lop WHERE malop='" . $lops . "'";
-                    $kq3 = mysqli_query($conn, $sql3) or die("Không thể xuất thông tin người dùng " . mysqli_error());
-                    $lop = mysqli_fetch_array($kq3);
-
-                    $hinhthucs = $row["mahinhthuc"];
-                    $sql4 = "SELECT * FROM hinhthuc WHERE mahinhthuc='" . $hinhthucs . "'";
-                    $kq4 = mysqli_query($conn, $sql4) or die("Không thể xuất thông tin người dùng " . mysqli_error());
-                    $hinhthuc = mysqli_fetch_array($kq4);
-
-                    $namhocs = $row["manamhoc"];
-                    $sql5 = "SELECT * FROM namhoc WHERE manamhoc='" . $namhocs . "'";
-                    $kq5 = mysqli_query($conn, $sql5) or die("Không thể xuất thông tin người dùng " . mysqli_error());
-                    $namhoc = mysqli_fetch_array($kq5);
-
-                    $monhocs = $row["mamon"];
-                    $sql6 = "SELECT * FROM monhoc WHERE mamon='" . $monhocs . "'";
-                    $kq6 = mysqli_query($conn, $sql6) or die("Không thể xuất thông tin người dùng " . mysqli_error());
-                    $monhoc = mysqli_fetch_array($kq6);
 
                     echo "<tr style='height:50px;'>";
                     echo "<td> " . $row["malichthi"] . "</td>";
                     $usern = $row["malichthi"];
-                    echo "<td> " . $hocky["tenhocky"] . "</td>";
-                    echo "<td> " . $lop["malop"] . "</td>";
-                    echo "<td> " . $hinhthuc["hinhthucthi"] . "</td>";
-                    echo "<td> " . $namhoc["tennamhoc"] . "</td>";
-                    echo "<td> " . $monhoc["tenmon"] . "</td>";
+                    echo "<td> " . $row["tenhocky"] . "</td>";
+                    echo "<td> " . $row["malop"] . "</td>";
+                    echo "<td> " . $row["hinhthucthi"] . "</td>";
+                    echo "<td> " . $row["tennamhoc"] . "</td>";
+                    echo "<td> " . $row["tenmon"] . "</td>";
                     echo "<td> " . $row["tenlichthi"] . "</td>";
                     echo "<td>" . date('d/m/Y', strtotime($row["ngaythi"])) . "</td>";
                     echo "<td>" . $row["phongthi"] . "</td>";

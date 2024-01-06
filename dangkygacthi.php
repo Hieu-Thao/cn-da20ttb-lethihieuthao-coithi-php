@@ -149,7 +149,7 @@ while ($row = mysqli_fetch_array($kq)) {
                 <input type='hidden' name='magv' value='" . $giangvien_login["magv"] . "'>
                 <input type='hidden' name='malichthi' value='{$row["malichthi"]}'>
                 <button class='btn-dk' type='submit' name='dangky'>Đăng ký</button>
-              </form>";
+              </form>"; 
     } else {
         if ($row["tinhtrang"] == "Chờ duyệt") {
             echo "Chờ duyệt";

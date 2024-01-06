@@ -70,10 +70,12 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                 </a>
             </div>
             <div class="btn-center-search">
-                <input type="text" name="tendn" placeholder="Tìm kiếm" required>
-                <button type="submit">
-                    <ion-icon name="search-outline"></ion-icon>
-                </button>
+                <form action="" method="GET" class="btn-center-search">
+                    <input type="text" name="search_name" placeholder="Tìm kiếm" required>
+                    <button type="submit">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -120,6 +122,11 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                 </tr>
                 <?php
                     // Thực hiện truy vấn với điều kiện lọc (hoặc không có điều kiện)
+
+                    
+
+                    $search_name = isset($_GET['search_name']) ? $_GET['search_name'] : '';
+
                     $sql = "SELECT lt.*, gv.hotengv, hk.tenhocky, l.tenlop, nh.tennamhoc, mh.tenmon, ht.thoigian, ht.dongia, pcc.tinhtrang
                             FROM lichthi lt
                             LEFT JOIN phancongcoithi pcc ON lt.malichthi = pcc.malichthi
@@ -130,10 +137,18 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                             LEFT JOIN monhoc mh ON lt.mamon = mh.mamon
                             LEFT JOIN hinhthuc ht ON lt.mahinhthuc = ht.mahinhthuc
                             WHERE 1 $dateCondition";
-                                if (isset($_GET['tinhtrang']) && $_GET['tinhtrang'] !== '' && $_GET['tinhtrang'] !== 'Tất cả') {
-                                    $selectedTinhTrang = $_GET['tinhtrang'];
-                                    $sql .= " AND pcc.tinhtrang = '$selectedTinhTrang'";
-                                }
+
+                    // Append conditions for searching teacher's name and subject's name
+                    if (!empty($search_name)) {
+                        $sql .= " AND (gv.hotengv LIKE '%$search_name%' OR mh.tenmon LIKE '%$search_name%')";
+                    }
+
+                    // Append condition for filtering by 'tinhtrang'
+                    if (isset($_GET['tinhtrang']) && $_GET['tinhtrang'] !== '' && $_GET['tinhtrang'] !== 'Tất cả') {
+                        $selectedTinhTrang = $_GET['tinhtrang'];
+                        $sql .= " AND pcc.tinhtrang = '$selectedTinhTrang'";
+                    }
+
                                 $kq = mysqli_query($conn, $sql) or die("Không thể truy xuất dữ liệu " . mysqli_error($conn));
                                 while ($row = mysqli_fetch_array($kq)) {
                         echo "<tr>";

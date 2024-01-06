@@ -1,5 +1,9 @@
 <?php
-session_start();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+include("header_admin.php");
 include("ketnoi.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,15 +28,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $gv_info_result = mysqli_query($conn, $gv_info_query);
                 $gv_info = mysqli_fetch_assoc($gv_info_result);
 
-                // Gửi email
-                $subject = "Thông báo phân công coi thi đã được duyệt";
-                $message = "Chào " . $gv_info['hotengv'] . ",\n\nLịch thi của bạn đã được duyệt.\nCảm ơn bạn đã đóng góp.";
+                // Lấy thông tin chi tiết lịch thi từ CSDL
+                $lichthi_info_query = "SELECT lt.*, gv.hotengv, gv.magv, hk.tenhocky, l.tenlop, nh.tennamhoc, mh.tenmon, pcc.tinhtrang, ht.thoigian
+                                        FROM lichthi lt
+                                        LEFT JOIN phancongcoithi pcc ON lt.malichthi = pcc.malichthi
+                                        LEFT JOIN giangvien gv ON pcc.magv = gv.magv
+                                        LEFT JOIN hocky hk ON lt.mahocky = hk.mahocky
+                                        LEFT JOIN lop l ON lt.malop = l.malop
+                                        LEFT JOIN namhoc nh ON lt.manamhoc = nh.manamhoc
+                                        LEFT JOIN monhoc mh ON lt.mamon = mh.mamon
+                                        INNER JOIN hinhthuc ht ON lt.mahinhthuc = ht.mahinhthuc
+                                        WHERE lt.malichthi = '$malichthi'";
+                $lichthi_info_result = mysqli_query($conn, $lichthi_info_query);
+                $lichthi_info = mysqli_fetch_assoc($lichthi_info_result);
 
-                $headers = "From: lehthaoz99@gmail.com\r\n";
-                $headers .= "Reply-To: lehthaoz99@gmail.com\r\n";
-                $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+                require 'vendor/autoload.php'; // Đường dẫn đến file autoload.php của Composer
 
-                mail($gv_info['email'], $subject, $message, $headers);
+                $mail = new PHPMailer(true);
+
+                try {
+                    // Server settings
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com'; // SMTP server
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'lehthaoz99@gmail.com'; // SMTP username
+                    $mail->Password   = 'ysya yppu gtib pedm'; // SMTP password
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->Port       = 465; // Port for SMTPS
+
+                    // Recipients
+                    $mail->setFrom('lehthaoz99@gmail.com', 'KHOA KTCN');
+                    $mail->addAddress($gv_info['email'], $gv_info['hotengv']);
+
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->CharSet = 'UTF-8';
+                    $mail->Subject = 'Thông báo phân công coi thi đã được duyệt';
+
+                    // Nội dung email với thông tin chi tiết lịch thi
+                    $mail->Body    = "Xin chào {$gv_info['hotengv']},<br><br>"
+                                    . "Lịch thi của bạn đã được duyệt:<br>"
+                                    . "- Môn coi thi: {$lichthi_info['tenmon']}<br>"
+                                    . "- Lớp: {$lichthi_info['tenlop']}<br>"
+                                    . "- Ngày thi: {$lichthi_info['ngaythi']}<br>"
+                                    . "- Tiết thi: {$lichthi_info['tietthi']}<br>"
+                                    . "- Phòng thi: {$lichthi_info['phongthi']}<br><br>"
+                                    . "Vui lòng sắp xếp thời gian để tham gia coi thi.";
+
+                    $mail->send();
+                    echo 'Email đã được gửi thành công.';
+                } catch (Exception $e) {
+                    echo "Không thể gửi email: {$mail->ErrorInfo}";
+                }
             }
 
             echo ("<script language=javascript>
@@ -60,15 +107,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $gv_info_result = mysqli_query($conn, $gv_info_query);
                 $gv_info = mysqli_fetch_assoc($gv_info_result);
 
-                // Gửi email
-                $subject = "Thông báo phân công coi thi đã được duyệt";
-                $message = "Chào " . $gv_info['hotengv'] . ",\n\nLịch thi của bạn đã được duyệt.\nCảm ơn bạn đã đóng góp.";
+                // Lấy thông tin chi tiết lịch thi từ CSDL
+                $lichthi_info_query = "SELECT lt.*, gv.hotengv, gv.magv, hk.tenhocky, l.tenlop, nh.tennamhoc, mh.tenmon, pcc.tinhtrang, ht.thoigian
+                                        FROM lichthi lt
+                                        LEFT JOIN phancongcoithi pcc ON lt.malichthi = pcc.malichthi
+                                        LEFT JOIN giangvien gv ON pcc.magv = gv.magv
+                                        LEFT JOIN hocky hk ON lt.mahocky = hk.mahocky
+                                        LEFT JOIN lop l ON lt.malop = l.malop
+                                        LEFT JOIN namhoc nh ON lt.manamhoc = nh.manamhoc
+                                        LEFT JOIN monhoc mh ON lt.mamon = mh.mamon
+                                        INNER JOIN hinhthuc ht ON lt.mahinhthuc = ht.mahinhthuc
+                                        WHERE lt.malichthi = '$malichthi'";
+                $lichthi_info_result = mysqli_query($conn, $lichthi_info_query);
+                $lichthi_info = mysqli_fetch_assoc($lichthi_info_result);
 
-                $headers = "From: lehthaoz99@gmail.com\r\n";
-                $headers .= "Reply-To: lehthaoz99@gmail.com\r\n";
-                $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+                require 'vendor/autoload.php'; // Đường dẫn đến file autoload.php của Composer
 
-                mail($gv_info['email'], $subject, $message, $headers);
+                $mail = new PHPMailer(true);
+
+                try {
+                    // Server settings
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com'; // SMTP server
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'lehthaoz99@gmail.com'; // SMTP username
+                    $mail->Password   = 'ysya yppu gtib pedm'; // SMTP password
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->Port       = 465; // Port for SMTPS
+
+                    // Recipients
+                    $mail->setFrom('lehthaoz99@gmail.com', 'KHOA KTCN');
+                    $mail->addAddress($gv_info['email'], $gv_info['hotengv']);
+
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->CharSet = 'UTF-8';
+                    $mail->Subject = 'Thông báo Lịch coi thi bạn đăng ký đã được duyệt';
+
+                    // Nội dung email với thông tin chi tiết lịch thi
+                    $mail->Body    = "Xin chào {$gv_info['hotengv']},<br><br>"
+                                    . "Lịch thi của bạn đã được duyệt:<br>"
+                                    . "- Môn coi thi: {$lichthi_info['tenmon']}<br>"
+                                    . "- Lớp: {$lichthi_info['tenlop']}<br>"
+                                    . "- Ngày thi: {$lichthi_info['ngaythi']}<br>"
+                                    . "- Tiết thi: {$lichthi_info['tietthi']}<br>"
+                                    . "- Phòng thi: {$lichthi_info['phongthi']}<br><br>"
+                                    . "Vui lòng sắp xếp thời gian để tham gia coi thi.";
+                    $mail->send();
+                    echo 'Email đã được gửi thành công.';
+                } catch (Exception $e) {
+                    echo "Không thể gửi email: {$mail->ErrorInfo}";
+                }
             }
         } else {
             echo "Không thể thêm mới phân công giảng viên coi thi: " . mysqli_error($conn);
@@ -78,4 +167,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // If machitiet doesn't exist, show an error message
     echo "Machitiet does not exist!";
 }
+
+include("footer_admin.php");
 ?>
