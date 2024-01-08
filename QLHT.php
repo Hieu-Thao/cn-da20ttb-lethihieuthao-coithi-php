@@ -24,10 +24,14 @@ include("header_admin.php");
             </div>
         </div>
         <div class="table">
-            <table width="70%" class="table-content">
+            <table width="90%" class="table-content">
                 <tr style="background-color:#CDD0CB; font-weight:600; height:40px;">
                     <td width="10%">Mã hình thức</td>
-                    <td width="35%">Tên hình thức</td>
+                    <td width="20%">Tên hình thức</td>
+                    <td width="15%">Hình thức thi</td>
+                    <td width="10%">Thời gian</td>
+                    <td width="10%">Buổi</td>
+                    <td width="10%">Đơn giá</td>
                     <td width="15%">Tính năng</td>
                 </tr>
                 <?php
@@ -46,6 +50,10 @@ include("header_admin.php");
                     echo "<td>" . $row["mahinhthuc"] . "</td>";
                     $usern = $row["mahinhthuc"];
                     echo "<td>" . $row["tenhinhthuc"] . "</td>";
+                    echo "<td>" . $row["hinhthucthi"] . "</td>";
+                    echo "<td>" . $row["thoigian"] . "</td>";
+                    echo "<td>" . $row["buoi"] . "</td>";
+                    echo "<td>" . $row["dongia"] . "</td>";
                     echo "<td class='table-icon'>
                     <a href='sua_hinhthuc.php?user=$usern'><button><ion-icon name='create-outline'></ion-icon></button></a>
                     <a href='xoa_hinhthuc.php?user=$usern'><button><ion-icon name='trash-outline'></button></ion-icon></a>

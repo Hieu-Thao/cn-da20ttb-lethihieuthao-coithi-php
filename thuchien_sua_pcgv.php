@@ -3,8 +3,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+require 'vendor/autoload.php'; // Đường dẫn đến file autoload.php của Composer
+
 include("header_admin.php");
 include("ketnoi.php");
+
+$mail = new PHPMailer(true);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $malichthi = $_POST["malichthi"];
@@ -14,6 +18,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Kiểm tra xem có phân công giảng viên cho lịch thi này chưa
     $check = "SELECT * FROM phancongcoithi WHERE malichthi = '$malichthi'";
     $checkkq = mysqli_query($conn, $check);
+
+    // Tạo và cấu hình đối tượng $mail ở đây để tránh vấn đề
+    // khi gửi email ở cả trường hợp INSERT và UPDATE
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com'; // SMTP server
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'lehthaoz99@gmail.com'; // SMTP username
+    $mail->Password   = 'ysya yppu gtib pedm'; // SMTP password
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port       = 465; // Port for SMTPS
+    $mail->setFrom('lehthaoz99@gmail.com', 'KHOA KTCN - TVU');
 
     if (mysqli_num_rows($checkkq) > 0) {
         // Nếu đã có phân công, thực hiện UPDATE
@@ -42,38 +57,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $lichthi_info_result = mysqli_query($conn, $lichthi_info_query);
                 $lichthi_info = mysqli_fetch_assoc($lichthi_info_result);
 
-                require 'vendor/autoload.php'; // Đường dẫn đến file autoload.php của Composer
-
-                $mail = new PHPMailer(true);
-
                 try {
-                    // Server settings
-                    $mail->isSMTP();
-                    $mail->Host       = 'smtp.gmail.com'; // SMTP server
-                    $mail->SMTPAuth   = true;
-                    $mail->Username   = 'lehthaoz99@gmail.com'; // SMTP username
-                    $mail->Password   = 'ysya yppu gtib pedm'; // SMTP password
-                    $mail->SMTPSecure = 'ssl';
-                    $mail->Port       = 465; // Port for SMTPS
-
-                    // Recipients
-                    $mail->setFrom('lehthaoz99@gmail.com', 'KHOA KTCN');
-                    $mail->addAddress($gv_info['email'], $gv_info['hotengv']);
-
                     // Content
+                    $mail->addAddress($gv_info['email'], $gv_info['hotengv']);
                     $mail->isHTML(true);
                     $mail->CharSet = 'UTF-8';
                     $mail->Subject = 'Thông báo phân công coi thi đã được duyệt';
 
                     // Nội dung email với thông tin chi tiết lịch thi
-                    $mail->Body    = "Xin chào {$gv_info['hotengv']},<br><br>"
-                                    . "Lịch thi của bạn đã được duyệt:<br>"
-                                    . "- Môn coi thi: {$lichthi_info['tenmon']}<br>"
-                                    . "- Lớp: {$lichthi_info['tenlop']}<br>"
-                                    . "- Ngày thi: {$lichthi_info['ngaythi']}<br>"
-                                    . "- Tiết thi: {$lichthi_info['tietthi']}<br>"
-                                    . "- Phòng thi: {$lichthi_info['phongthi']}<br><br>"
-                                    . "Vui lòng sắp xếp thời gian để tham gia coi thi.";
+                    // Định dạng ngày từ Y-m-d thành d/m/Y (không hiển thị thời gian)
+                    $ngaythi_formatted = date('d/m/Y', strtotime($lichthi_info['ngaythi']));
+
+                    // Sử dụng định dạng mới trong văn bản
+                    $mail->Body = "Xin chào {$gv_info['hotengv']},<br><br>"
+                        . "Lịch thi của bạn đã được duyệt:<br>"
+                        . "- Môn coi thi: {$lichthi_info['tenmon']}<br>"
+                        . "- Lớp: {$lichthi_info['tenlop']}<br>"
+                        . "- Ngày thi: {$ngaythi_formatted}<br>"
+                        . "- Tiết thi: {$lichthi_info['tietthi']}<br>"
+                        . "- Phòng thi: {$lichthi_info['phongthi']}<br><br>"
+                        . "Quý thầy, cô vui lòng sắp xếp thời gian để tham gia coi thi.";
 
                     $mail->send();
                     echo 'Email đã được gửi thành công.';
@@ -121,38 +124,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $lichthi_info_result = mysqli_query($conn, $lichthi_info_query);
                 $lichthi_info = mysqli_fetch_assoc($lichthi_info_result);
 
-                require 'vendor/autoload.php'; // Đường dẫn đến file autoload.php của Composer
-
-                $mail = new PHPMailer(true);
-
                 try {
-                    // Server settings
-                    $mail->isSMTP();
-                    $mail->Host       = 'smtp.gmail.com'; // SMTP server
-                    $mail->SMTPAuth   = true;
-                    $mail->Username   = 'lehthaoz99@gmail.com'; // SMTP username
-                    $mail->Password   = 'ysya yppu gtib pedm'; // SMTP password
-                    $mail->SMTPSecure = 'ssl';
-                    $mail->Port       = 465; // Port for SMTPS
-
-                    // Recipients
-                    $mail->setFrom('lehthaoz99@gmail.com', 'KHOA KTCN');
-                    $mail->addAddress($gv_info['email'], $gv_info['hotengv']);
-
                     // Content
+                    $mail->addAddress($gv_info['email'], $gv_info['hotengv']);
                     $mail->isHTML(true);
                     $mail->CharSet = 'UTF-8';
                     $mail->Subject = 'Thông báo Lịch coi thi bạn đăng ký đã được duyệt';
 
                     // Nội dung email với thông tin chi tiết lịch thi
-                    $mail->Body    = "Xin chào {$gv_info['hotengv']},<br><br>"
-                                    . "Lịch thi của bạn đã được duyệt:<br>"
-                                    . "- Môn coi thi: {$lichthi_info['tenmon']}<br>"
-                                    . "- Lớp: {$lichthi_info['tenlop']}<br>"
-                                    . "- Ngày thi: {$lichthi_info['ngaythi']}<br>"
-                                    . "- Tiết thi: {$lichthi_info['tietthi']}<br>"
-                                    . "- Phòng thi: {$lichthi_info['phongthi']}<br><br>"
-                                    . "Vui lòng sắp xếp thời gian để tham gia coi thi.";
+                    // Định dạng ngày từ Y-m-d thành d/m/Y (không hiển thị thời gian)
+                    $ngaythi_formatted = date('d/m/Y', strtotime($lichthi_info['ngaythi']));
+
+                    // Sử dụng định dạng mới trong văn bản
+                    $mail->Body = "Xin chào {$gv_info['hotengv']},<br><br>"
+                        . "Lịch thi của bạn đã được duyệt:<br>"
+                        . "- Môn coi thi: {$lichthi_info['tenmon']}<br>"
+                        . "- Lớp: {$lichthi_info['tenlop']}<br>"
+                        . "- Ngày thi: {$ngaythi_formatted}<br>"
+                        . "- Tiết thi: {$lichthi_info['tietthi']}<br>"
+                        . "- Phòng thi: {$lichthi_info['phongthi']}<br><br>"
+                        . "Quý thầy, cô vui lòng sắp xếp thời gian để tham gia coi thi.";
+
                     $mail->send();
                     echo 'Email đã được gửi thành công.';
                 } catch (Exception $e) {
@@ -165,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     // If machitiet doesn't exist, show an error message
-    echo "Machitiet does not exist!";
+    echo "does not exist!";
 }
 
 include("footer_admin.php");

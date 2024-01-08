@@ -16,9 +16,9 @@ $row = mysqli_fetch_array($kq);
             <p class="top-center-p">Sửa lớp</p>
         </div>
         <div class="table-center">
-            <div class="txt-gv-top">
+        <div class="txt-gv-top-lop">
                 <div class="txt-gv-lb">
-                    <label>Mã lớp</label>
+                    <label>Mã lớp: <span style="color: red;">(*)</span></label>
                     <input type="text" name="malop" value="<?php echo $row["malop"]; ?>" readonly>
                 </div>
                 <div class="txt-gv-lb">

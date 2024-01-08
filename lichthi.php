@@ -134,7 +134,7 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                 echo "<td> " . $row["malichthi"] . "</td>";
                 $usern = $row["malichthi"];
                 echo "<td> " . $lop["malop"] . "</td>";
-                echo "<td> " . $hinhthuc["tenhinhthuc"] . "</td>";
+                echo "<td> " . $hinhthuc["hinhthucthi"] . "</td>";
                 echo "<td> " . $monhoc["tenmon"] . "</td>";
                 echo "<td>" . date('d/m/Y', strtotime($row["ngaythi"])) . "</td>";
                 echo "<td>" . $row["phongthi"] . "</td>";

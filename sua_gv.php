@@ -23,7 +23,7 @@ $row = mysqli_fetch_array($kq);
             </div>
             <div class="txt-gv-top">
                 <div class="txt-gv-lb">
-                    <label>Mã GV:</label>
+                    <label>Mã GV: <span style="color: red;">(*)</span></label>
                     <input type="text" name="magv" value="<?php echo $row["magv"]; ?>" readonly></input>
                 </div>
                 <div class="txt-gv-lb">
@@ -64,7 +64,7 @@ $row = mysqli_fetch_array($kq);
                     <input type="text" name="pass" value="<?php echo $row["pass"]; ?>"></input>
                 </div>
                 <div class="txt-gv-lb">
-                    <label>Ảnh đại diện:</label>
+                    <label style="padding-bottom: 10px;">Ảnh đại diện:</label>
                     <img src="<?php echo $row['hinhdaidien']; ?>" height="100" width="100">
                     <input type="hidden" name="hinhcu" value="<?php echo $row['hinhdaidien']; ?>"><br>Ảnh mới:
                     <input type="file" name="hinhdaidien">

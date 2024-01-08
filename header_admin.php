@@ -111,7 +111,7 @@ if (!isset($_SESSION["admin"])) {
                     <ion-icon name="ribbon"></ion-icon>
                     <p>Phân công coi thi</p>
                 </a>
-                <a href="#" class="s-left-item">
+                <a href="doimatkhauadmin.php" class="s-left-item">
                     <ion-icon name="key"></ion-icon>
                     <p>Đổi mật khẩu</p>
                 </a>

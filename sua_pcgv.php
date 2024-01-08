@@ -43,13 +43,36 @@ $usern=$_REQUEST["user"];
                     <label>Tên lịch thi:</label>
                     <input type="text" name="tenlichthi" value="<?php echo $row["tenlichthi"]; ?>" readonly></input>
                 </div>
-                <div style="background-color: lightgray; padding:15px; border-radius:5px;" class="txt-gv-lb">
-                    <label>Giảng viên:</label>
+                <div class="txt-gv-lb">
+                    <label>Thời gian:</label>
+                    <input type="text" name="thoigian" value="<?php echo $row["thoigian"]; ?>" readonly></input>
+                </div>
+            </div>
+            <div class="txt-gv-jus">
+                <div class="txt-gv-lb">
+                    <label>Lớp:</label>
+                    <input type="text" name="lop" value="<?php echo $row["tenlop"]; ?>" readonly></input>
+                </div>
+                <div class="txt-gv-lb">
+                    <label>Môn học:</label>
+                    <input type="text" name="monhoc" value="<?php echo $row["tenmon"]; ?>" readonly></input>
+                </div>
+                <div class="txt-gv-lb">
+                    <label>Ngày thi:</label>
+                    <input type="text" name="ngaythi" value="<?php echo $row["ngaythi"]; ?>" readonly></input>
+                </div>
+            </div>
+            <div class="txt-gv-bot">
+                <div class="txt-gv-lb">
+                    <label>Tiết thi:</label>
+                    <input type="text" name="tietthi" value="<?php echo $row["tietthi"]; ?>" readonly></input>
+                </div>
+                <div class="txt-gv-lb">
+                <label>Giảng viên <span style="color: red;">(*)</span></label>
                     <select name="giangvien">
                         <?php
-                            $sql = "SELECT * FROM giangvien"; // Retrieve all records from the 'giangvien' table
+                            $sql = "SELECT * FROM giangvien";
                             $kq = mysqli_query($conn, $sql) or die("Không thể thêm giảng viên: " . mysqli_error($conn));
-                            
                             while ($gv_row = mysqli_fetch_assoc($kq)) {
                                 $magv = $gv_row['magv'];
                                 $hotengv = $gv_row['hotengv'];
@@ -59,47 +82,14 @@ $usern=$_REQUEST["user"];
                             ?>
                     </select>
                 </div>
-            </div>
-            
-            <div class="txt-gv-bot">
-            <!-- <div class="txt-gv-lb">
-                    <label>Học kỳ:</label>
-                    <input type="text" name="hocky" value="<?php echo $row["tenhocky"]; ?>" readonly></input>
-                </div> -->
+
                 <div class="txt-gv-lb">
-                    <label>Lớp:</label>
-                    <input type="text" name="lop" value="<?php echo $row["tenlop"]; ?>" readonly></input>
+                    <label>Tình trạng <span style="color: red;">(*)</span></label>
+                    <select name="tinhtrang">
+                        <option value="Đã duyệt" <?php echo ($row["tinhtrang"] == "Đã duyệt") ? "selected" : ""; ?>>Đã duyệt</option>
+                        <option value="Chờ duyệt" <?php echo ($row["tinhtrang"] == "Chờ duyệt") ? "selected" : ""; ?>>Chờ duyệt</option>
+                    </select>
                 </div>
-                <!-- <div class="txt-gv-lb">
-                    <label>Năm học:</label>
-                    <input type="text" name="namhoc" value="<?php echo $row["tennamhoc"]; ?>" readonly></input>
-                </div> -->
-                <div class="txt-gv-lb">
-                    <label>Môn học:</label>
-                    <input type="text" name="monhoc" value="<?php echo $row["tenmon"]; ?>" readonly></input>
-                </div>
-                <div class="txt-gv-lb">
-                    <label>Ngày thi:</label>
-                    <input type="text" name="ngaythi" value="<?php echo $row["ngaythi"]; ?>" readonly></input>
-                </div>
-                </div>
-                <div class="txt-gv-lb">
-                    <label>Tiết thi:</label>
-                    <input type="text" name="tietthi" value="<?php echo $row["tietthi"]; ?>" readonly></input>
-                </div>
-                <div class="txt-gv-bot">
-                <div class="txt-gv-lb">
-                    <label>Thời gian:</label>
-                    <input type="text" name="thoigian" value="<?php echo $row["thoigian"]; ?>" readonly></input>
-                </div>
-                
-                <div style="background-color: lightgray; padding:15px; border-radius:5px;" class="txt-gv-lb">
-    <label>Tình trạng:</label>
-    <select name="tinhtrang">
-        <option value="Đã duyệt" <?php echo ($row["tinhtrang"] == "Đã duyệt") ? "selected" : ""; ?>>Đã duyệt</option>
-        <option value="Chờ duyệt" <?php echo ($row["tinhtrang"] == "Chờ duyệt") ? "selected" : ""; ?>>Chờ duyệt</option>
-    </select>
-</div>
             </div>
             <div class="txt-btn">
                 <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại" />

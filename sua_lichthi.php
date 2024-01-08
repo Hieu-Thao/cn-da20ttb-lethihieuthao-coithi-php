@@ -27,7 +27,8 @@ $row = mysqli_fetch_array($kq);
             <div class="txt-gv-top">
 
                 <div class="txt-gv-lb">
-                    <label>Mã lịch thi:</label>
+                    <label>Mã lịch thi: <span style="color: red;">(*)</span></label>
+
                     <input type="text" name="malichthi" value="<?php echo $row["malichthi"]; ?>" readonly></input>
                 </div>
                 <div class="txt-gv-lb">
@@ -58,23 +59,6 @@ $row = mysqli_fetch_array($kq);
             $tenlop = $lop_row['tenlop'];
             $selected = ($malop == $row["malop"]) ? "selected" : "";
             echo "<option value=\"$malop\" $selected>$tenlop</option>";
-
-        }
-        ?>
-                    </select>
-                </div>
-                <div class="txt-gv-lb">
-                    <label>Hình thức thi:</label>
-                    <select name="hinhthuc">
-                        <?php
-        $sql2 = "SELECT mahinhthuc, tenhinhthuc FROM hinhthuc";
-        $kq2 = mysqli_query($conn, $sql2) or die("Không thể thêm bộ môn: " . mysqli_error($conn));
-
-        while ($hinhthuc_row = mysqli_fetch_assoc($kq2)) {
-            $mahinhthuc = $hinhthuc_row['mahinhthuc'];
-            $tenhinhthuc = $hinhthuc_row['tenhinhthuc'];
-            $selected = ($mahinhthuc == $row["mahinhthuc"]) ? "selected" : "";
-            echo "<option value=\"$mahinhthuc\" $selected>$tenhinhthuc</option>";
 
         }
         ?>
@@ -138,12 +122,31 @@ $row = mysqli_fetch_array($kq);
                 </div>
                 <div class="txt-gv-lb">
                     <label>Tiết thi:</label>
-                    <input type="text" name="tietthi" value="<?php echo $row["tietthi"]; ?>"></input>
+                    <input type="number" min="1" name="tietthi" value="<?php echo $row["tietthi"]; ?>"></input>
                 </div>
-                <div class="txt-gv-lb">
+            </div>
+            <div class="txt-gv-bot">
+            <div class="txt-gv-lb">
+                    <label>Hình thức thi:</label>
+                    <select name="hinhthuc">
+                        <?php
+        $sql2 = "SELECT mahinhthuc, tenhinhthuc FROM hinhthuc";
+        $kq2 = mysqli_query($conn, $sql2) or die("Không thể thêm bộ môn: " . mysqli_error($conn));
+
+        while ($hinhthuc_row = mysqli_fetch_assoc($kq2)) {
+            $mahinhthuc = $hinhthuc_row['mahinhthuc'];
+            $tenhinhthuc = $hinhthuc_row['tenhinhthuc'];
+            $selected = ($mahinhthuc == $row["mahinhthuc"]) ? "selected" : "";
+            echo "<option value=\"$mahinhthuc\" $selected>$tenhinhthuc</option>";
+
+        }
+        ?>
+                    </select>
+                </div>
+                <!-- <div class="txt-gv-lb">
                     <label>Thời gian:</label>
                     <input type="text" name="thoigian" value="<?php echo $row["thoigian"]; ?>" readonly></input>
-                </div>
+                </div> -->
             </div>
             <div class="txt-btn">
                 <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại" />

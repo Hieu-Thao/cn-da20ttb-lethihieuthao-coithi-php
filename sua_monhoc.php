@@ -20,10 +20,11 @@ $row = mysqli_fetch_array($kq);
                 <p>Thêm mới môn học</p>
             </div>
         </div>
-        <div class="txt-gv-top">
+       
             <form enctype="multipart/form-data" action="thuchien_sua_monhoc.php" name="frmxlmh" method="post">
+            <div class="txt-gv-top">
                 <div class="txt-gv-lb">
-                    <label>Mã môn học:</label>
+                    <label>Mã môn học: <span style="color: red;">(*)</span></label>
                     <input type="text" name="mamon" value="<?php echo $row["mamon"]; ?>" readonly></input>
                 </div>
                 <div class="txt-gv-lb">

@@ -1,15 +1,12 @@
 <?php
-include("header_gv.php");
+include("header_admin.php");
 include("ketnoi.php");
 
 // Check if the session key is set before using it
-$userlogin = isset($_SESSION["giangvien"]) ? $_SESSION["giangvien"] : null;
+$userlogin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : null;
 
 if ($userlogin) {
-    $sql = "SELECT gv.*, bm.tenbomon
-            FROM giangvien gv
-            JOIN bomon bm ON gv.mabomon = bm.mabomon
-            WHERE gv.email = '" . $userlogin . "'";
+    $sql = "SELECT * FROM admin WHERE email = '" . $userlogin . "'";
 
     $result = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người dùng " . mysqli_error($conn));
     $row = mysqli_fetch_array($result);
@@ -26,13 +23,13 @@ if ($userlogin) {
             // Validate the new password (you might want to enhance this)
             if ($newPassword == $confirmPassword) {
                 // Update the password in the database
-                $updateSql = "UPDATE giangvien SET pass = '$newPassword' WHERE email = '$userlogin'";
+                $updateSql = "UPDATE admin SET pass = '$newPassword' WHERE email = '$userlogin'";
                 mysqli_query($conn, $updateSql) or die("Không thể cập nhật mật khẩu " . mysqli_error($conn));
                 
                 // Inform the user that the password has been updated
                 echo ("<script language=javascript>
                     alert('Mật khẩu của bạn đã được cập nhật');
-                    window.location='thongtincanhan.php';
+                    window.location='doimatkhauadmin.php';
                     </script> ");
             } else {
                 echo ("<script language=javascript>
@@ -72,12 +69,11 @@ if ($userlogin) {
             </div>
         </div>
         <div class="btn-dmk-luu">
-            <input style="background-color: #F15B2A;" type="submit" value="Lưu lại">
-            <a style="text-decoration: none; background-color: #73777B;" type="reset" href="thongtincanhan.php">Hủy bỏ</a>
+            <input type="submit" value="Lưu lại">
+            <a type="reset" href="doimatkhauadmin.php">Hủy bỏ</a>
         </div>
     </form>
 </div>
-
 <?php
-include("footer.php");
+include("footer_admin.php")
 ?>

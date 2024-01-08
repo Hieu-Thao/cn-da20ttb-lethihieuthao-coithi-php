@@ -214,7 +214,7 @@ html {
     margin: 10px auto;
     border-bottom: 1px solid #FFCC70;
     padding-bottom: 5px;
-
+    gap: 15px;
 }
 
 .top-center-p {
@@ -325,19 +325,30 @@ table, th, td {
 
 
 /* Các chức năng */
-.txt-gv-top {
+
+/* .txt-gv-bot, .txt-gv-top {
     display: flex;
     gap: 30px;
     justify-content: space-evenly;
     margin: 20px 0px;
 }
 
-.txt-gv-bot {
+.txt-gv-jus{
     display: flex;
     gap: 30px;
     justify-content: space-evenly;
     margin: 20px 0px;
+} */
+
+.txt-gv-top, .txt-gv-jus, .txt-gv-bot{
+    display: flex;
+    gap: 30px;
+    padding: 20px 0px;
+    justify-content: space-around;
+    width: 85%;
+    margin: 0 auto;
 }
+
 
 .txt-gv-bot-cc{
     display: flex;
@@ -360,26 +371,24 @@ table, th, td {
     font-weight: 600;
 }
 
-
-
 .txt-gv-lb input {
-    width: 220px;
-    height: 26px;
-    border-radius: 5px;
-    background-color: #F1EFEF;
-    border: 1px solid #000000;
+    width: 230px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: #EEEEEE;
+    border: 1px solid #004172;
     margin-top: 5px;
-    /* font-size: 14px; */
+    font-size: 14px;
 }
 
 .txt-gv-lb select {
-    width: 220px;
-    height: 26px;
-    border-radius: 5px;
-    background-color: #F1EFEF;
-    border: 1px solid #000000;
+    width: 230px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: #EEEEEE;
+    border: 1px solid #004172;
     margin-top: 5px;
-    /* font-size: 14px; */
+    font-size: 14px;
 }
 
 .txt-btn {
@@ -398,6 +407,7 @@ table, th, td {
     border-radius: 5px;
     color: #ffffff;
     border: none;
+    height: 41px;
 }
 
 .txt-btn-luu:hover {
@@ -418,6 +428,7 @@ table, th, td {
     border-radius: 5px;
     color: black;
     border: none;
+    height: 41px;
 }
 
 
@@ -500,4 +511,64 @@ table, th, td {
     font-size: 17px;
     font-weight: 600;
     color: white;
+}
+
+.tinhtrang select{
+    height: 29px;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.dmk-td{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 20px 0px;
+}
+
+.full-dmk{
+    padding: 50px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.btn-dmk{
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-dmk input{
+    font-size: 25px;
+    width: 200px;
+}
+
+.btn-dmk-luu{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 0px;
+    align-items: center;
+}
+
+.btn-dmk-luu a{
+    background-color: lightslategrey;
+    color: #000000;
+    padding: 7px 8px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-dmk-luu input{
+    background-color: #004172;
+    color: white;
+    padding: 8px 8px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+
 }

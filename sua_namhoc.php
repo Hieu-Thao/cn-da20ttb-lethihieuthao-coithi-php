@@ -24,7 +24,7 @@ $row = mysqli_fetch_array($kq);
             <div class="txt-gv-top">
 
                 <div class="txt-gv-lb">
-                    <label>Mã năm học:</label>
+                    <label>Mã năm học: <span style="color: red;">(*)</span></label>
                     <input type="text" name="manamhoc" value="<?php echo $row["manamhoc"]; ?>" readonly></input>
                 </div>
                 <div class="txt-gv-lb">

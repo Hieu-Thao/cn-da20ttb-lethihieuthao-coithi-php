@@ -75,7 +75,7 @@ include("header_admin.php");
                     <p>Thêm lịch thi</p>
                 </a>
             </div>
-            <div>
+            <div class="tinhtrang">
                 <!-- Add this select dropdown within your HTML form -->
             <select id="filter_status" name="filter_status" onchange="filterTable()">
                 <option value="all">Tất cả</option>

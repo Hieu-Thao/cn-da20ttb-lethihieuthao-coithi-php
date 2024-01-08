@@ -15,10 +15,6 @@ include("header_admin.php");
         </div>
         <div class="txt-gv-top">
             <div class="txt-gv-lb">
-                    <label>Mã bộ môn: (*)</label>
-                    <input type="text" name="mabomon" readonly></input>
-                </div>
-            <div class="txt-gv-lb">
                     <label>Tên bộ môn</label>
                     <input type="text" name="tenbomon"></input>
                 </div>

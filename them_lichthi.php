@@ -14,10 +14,10 @@ include("header_admin.php");
                 </div>
             </div>
             <div class="txt-gv-top">
-                <div class="txt-gv-lb">
+                <!-- <div class="txt-gv-lb">
                     <label>Mã lịch thi:</label>
                     <input type="text" name="malichthi"></input>
-                </div>
+                </div> -->
                 <div class="txt-gv-lb">
                     <label>Mã học kỳ:</label>
                     <select name="hocky">
@@ -112,10 +112,6 @@ include("header_admin.php");
                     <label>Tiết thi:</label>
                     <input type="text" name="tietthi"></input>
                 </div>
-                <!-- <div class="txt-gv-lb">
-                    <label>Thời gian:</label>
-                    <input type="text" name="thoigian"></input>
-                </div> -->
             </div>
             <div class="txt-btn">
                 <input class="txt-btn-luu" type="submit" name="luu" value="Lưu lại" />

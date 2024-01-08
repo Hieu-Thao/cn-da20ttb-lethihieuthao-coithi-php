@@ -64,10 +64,6 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                     <ion-icon name="print-outline"></ion-icon>
                     <p>In dữ liệu</p>
                 </a>
-                <a href="#" class="button button-xtt">
-                    <ion-icon name="trash-outline"></ion-icon>
-                    <p>Xóa tất cả</p>
-                </a>
             </div>
             <div class="btn-center-search">
                 <form action="" method="GET" class="btn-center-search">
@@ -91,7 +87,7 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                         <input type="date" name="ngayKT" id="ngayKT" value="<?php echo $ngayKT; ?>"
                             onchange="this.form.submit()">
                     </div>
-                    <div>
+                    <div class="tinhtrang">
                     <select name="tinhtrang" onchange="this.form.submit()">
                         <option value="Tất cả" <?php echo (isset($_GET['tinhtrang']) && $_GET['tinhtrang'] === 'Tất cả') ? 'selected' : ''; ?>>Tất cả</option>
                         <option value="Chờ duyệt" <?php echo (isset($_GET['tinhtrang']) && $_GET['tinhtrang'] === 'Chờ duyệt') ? 'selected' : ''; ?>>Chờ duyệt</option>
