@@ -471,26 +471,8 @@ table, th, td {
     padding: 0px 5px;
 }
 
-.tk1{
-    background-color: #AE445A;
-    padding: 10px 10px;
-    width: 200px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.tk2{
-    background-color: #395B64;
-    padding: 10px 10px;
-    width: 200px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.tk3{
-    background-color: #A27B5C;
+.tk3, .tk2, .tk1{
+    background-color: white;
     padding: 10px 10px;
     width: 200px;
     text-align: center;
@@ -510,7 +492,11 @@ table, th, td {
     text-decoration: none;
     font-size: 17px;
     font-weight: 600;
-    color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
 .tinhtrang select{
@@ -570,5 +556,34 @@ table, th, td {
     text-decoration: none;
     font-weight: 500;
     border: none;
+}
 
+.fa-chart-simple, .fa-money-bill-1, .fa-chart-pie{
+    font-size: 45px;
+    color: #FFCC70;
+}
+
+.gv-img img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+}
+
+.full-date{
+    display: flex;
+    width: 115px;
+    border: none;
+    height: 40px;
+    align-items: center;
+    padding: 30px 0px;
+    justify-content: center;
+}
+
+.full-mt{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }

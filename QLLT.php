@@ -1,7 +1,13 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 
 <script>
-function sortTableByDate() {
+function parseDate(dateString) {
+    // Hàm chuyển đổi chuỗi ngày thành đối tượng ngày
+    var parts = dateString.split("/");
+    return new Date(parts[2], parts[1] - 1, parts[0]);
+}
+
+function sortTableByDate(order) {
     var table = document.querySelector('.table-content');
     var rows = Array.from(table.rows).slice(1); // Bỏ qua hàng tiêu đề
 
@@ -9,7 +15,11 @@ function sortTableByDate() {
         var dateA = new Date(parseDate(a.cells[7].textContent));
         var dateB = new Date(parseDate(b.cells[7].textContent));
 
-        return dateB - dateA; // Sắp xếp giảm dần theo ngày thi
+        if (order === 'asc') {
+            return dateA - dateB; // Sắp xếp tăng dần theo ngày thi
+        } else {
+            return dateB - dateA; // Sắp xếp giảm dần theo ngày thi
+        }
     });
 
     // Xóa dữ liệu đã sắp xếp khỏi bảng
@@ -23,15 +33,6 @@ function sortTableByDate() {
     });
 }
 
-function parseDate(dateString) {
-    // Hàm chuyển đổi chuỗi ngày thành đối tượng ngày
-    var parts = dateString.split("/");
-    return new Date(parts[2], parts[1] - 1, parts[0]);
-}
-
-
-// 
-
 function filterTable() {
     var table = document.querySelector('.table-content');
     var rows = Array.from(table.rows).slice(1); // Bỏ qua hàng tiêu đề
@@ -41,7 +42,10 @@ function filterTable() {
     rows.forEach(function(row) {
         var date = new Date(parseDate(row.cells[7].textContent));
 
-        if ((filterStatus === 'da_thi' && date < new Date(new Date().setDate(new Date().getDate() - 1))) || (filterStatus === 'sap_thi' && date >= new Date(new Date().setDate(new Date().getDate() - 1)))) {
+        if (
+            (filterStatus === 'da_thi' && date < new Date(new Date().setDate(new Date().getDate() - 1))) ||
+            (filterStatus === 'sap_thi' && date >= new Date(new Date().setDate(new Date().getDate() - 1)))
+        ) {
             row.style.display = '';
         } else if (filterStatus === 'all') {
             row.style.display = '';
@@ -50,10 +54,8 @@ function filterTable() {
         }
     });
 }
-
-
-
 </script>
+
 
 
 
@@ -77,13 +79,13 @@ include("header_admin.php");
             </div>
             <div class="tinhtrang">
                 <!-- Add this select dropdown within your HTML form -->
-            <select id="filter_status" name="filter_status" onchange="filterTable()">
-                <option value="all">Tất cả</option>
-                <option value="da_thi">Đã thi</option>
-                <option value="sap_thi">Sắp thi</option>
-            </select>
+                <select id="filter_status" name="filter_status" onchange="filterTable()">
+                    <option value="all">Tất cả</option>
+                    <option value="da_thi">Đã thi</option>
+                    <option value="sap_thi">Sắp thi</option>
+                </select>
             </div>
-            
+
 
         </div>
         <div class="table">
@@ -96,9 +98,16 @@ include("header_admin.php");
                     <td width="10%">Năm học</td>
                     <td width="15%">Môn học</td>
                     <td width="10%">Tên lịch thi</td>
-                    <td width="10%">Ngày thi &nbsp;<button onclick="sortTableByDate()">
-                            <ion-icon name="caret-up-outline"></ion-icon>
-                        </button></td>
+                    <td class="full-date" width="15%">Ngày thi &nbsp;
+                        <div class="full-mt">
+                            <button onclick="sortTableByDate('asc')">
+                                <ion-icon name="caret-up-outline"></ion-icon>
+                            </button>
+                            <button onclick="sortTableByDate('desc')">
+                                <ion-icon name="caret-down-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </td>
                     <td width="7%">Phòng thi</td>
                     <td width="5%">Tiết thi</td>
                     <td width="5%">Thời gian</td>

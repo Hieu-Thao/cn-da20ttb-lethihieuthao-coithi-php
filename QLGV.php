@@ -61,7 +61,7 @@ include("header_admin.php");
                     echo "<td> " . $row["hotengv"] . "</td>";
                     echo "<td>" . $row["sdtgv"] . "</td>";
                     echo "<td>" . $row["hocvi"] . "</td>";
-                    echo "<td><img src= '" . $row["hinhdaidien"] . "' height='50' width='50'></td>";
+                    echo "<td class='gv-img'><img src= '" . $row["hinhdaidien"] . "'></td>";
                     echo "<td>" . $row["email"] . "</td>";
                     echo "<td>" . $row["pass"] . "</td>";
                     echo "<td class='table-icon'>

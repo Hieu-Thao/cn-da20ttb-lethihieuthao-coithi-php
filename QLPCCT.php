@@ -1,7 +1,13 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 
 <script>
-function sortTableByDate() {
+function parseDate(dateString) {
+    // Hàm chuyển đổi chuỗi ngày thành đối tượng ngày
+    var parts = dateString.split("/");
+    return new Date(parts[2], parts[1] - 1, parts[0]);
+}
+
+function sortTableByDate(order) {
     var table = document.querySelector('.table-content');
     var rows = Array.from(table.rows).slice(1); // Bỏ qua hàng tiêu đề
 
@@ -9,7 +15,11 @@ function sortTableByDate() {
         var dateA = new Date(parseDate(a.cells[5].textContent));
         var dateB = new Date(parseDate(b.cells[5].textContent));
 
-        return dateB - dateA; // Sắp xếp giảm dần theo ngày thi
+        if (order === 'asc') {
+            return dateA - dateB; // Sắp xếp tăng dần theo ngày thi
+        } else {
+            return dateB - dateA; // Sắp xếp giảm dần theo ngày thi
+        }
     });
 
     // Xóa dữ liệu đã sắp xếp khỏi bảng
@@ -23,12 +33,29 @@ function sortTableByDate() {
     });
 }
 
-function parseDate(dateString) {
-    // Hàm chuyển đổi chuỗi ngày thành đối tượng ngày
-    var parts = dateString.split("/");
-    return new Date(parts[2], parts[1] - 1, parts[0]);
+function filterTable() {
+    var table = document.querySelector('.table-content');
+    var rows = Array.from(table.rows).slice(1); // Bỏ qua hàng tiêu đề
+
+    var filterStatus = document.getElementById('filter_status').value;
+
+    rows.forEach(function(row) {
+        var date = new Date(parseDate(row.cells[7].textContent));
+
+        if (
+            (filterStatus === 'da_thi' && date < new Date(new Date().setDate(new Date().getDate() - 1))) ||
+            (filterStatus === 'sap_thi' && date >= new Date(new Date().setDate(new Date().getDate() - 1)))
+        ) {
+            row.style.display = '';
+        } else if (filterStatus === 'all') {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
 }
 </script>
+
 
 <?php
 include("header_admin.php");
@@ -93,7 +120,6 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                         <option value="Chờ duyệt" <?php echo (isset($_GET['tinhtrang']) && $_GET['tinhtrang'] === 'Chờ duyệt') ? 'selected' : ''; ?>>Chờ duyệt</option>
                         <option value="Đã duyệt" <?php echo (isset($_GET['tinhtrang']) && $_GET['tinhtrang'] === 'Đã duyệt') ? 'selected' : ''; ?>>Đã duyệt</option>
                     </select>
-
                     </div>
                 </div>
             </div>
@@ -107,9 +133,16 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
                     <td width="20%">Mã giáo viên</td>
                     <td width="10%">Lớp</td>
                     <td width="10%">Môn</td>
-                    <td width="10%">Ngày thi &nbsp;<button onclick="sortTableByDate()">
-                            <ion-icon name="caret-up-outline"></ion-icon>
-                        </button></td>
+                    <td class="full-date" width="15%">Ngày thi &nbsp;
+                        <div class="full-mt">
+                            <button onclick="sortTableByDate('asc')">
+                                <ion-icon name="caret-up-outline"></ion-icon>
+                            </button>
+                            <button onclick="sortTableByDate('desc')">
+                                <ion-icon name="caret-down-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </td>
                     <td width="5%">Tiết thi</td>
                     <td width="5%">Thời gian</td>
                     <td width="5%">Đơn giá</td>

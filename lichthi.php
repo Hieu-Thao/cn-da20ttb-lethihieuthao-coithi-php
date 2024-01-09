@@ -1,41 +1,37 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 
 <script>
-    function sortTableByDate() {
-        var table = document.querySelector('.table-content');
-        var rows = Array.from(table.rows).slice(1); // Skip header row
+function parseDate(dateString) {
+    // Hàm chuyển đổi chuỗi ngày thành đối tượng ngày
+    var parts = dateString.split("/");
+    return new Date(parts[2], parts[1] - 1, parts[0]);
+}
 
-        rows.sort(function (a, b) {
-            var dateA = new Date(parseDate(a.cells[4].textContent));
-            var dateB = new Date(parseDate(b.cells[4].textContent));
-            var currentDate = new Date(); // Ngày hiện tại
+function sortTableByDate(order) {
+    var table = document.querySelector('.table-content');
+    var rows = Array.from(table.rows).slice(1); // Bỏ qua hàng tiêu đề
 
-            // So sánh ngày, đặt ngày hiện tại ở sau nếu có
-            if (dateA < currentDate) {
-                return -1; // A đứng trước
-            } else if (dateB < currentDate) {
-                return 1; // B đứng trước
-            } else {
-                return dateA - dateB; // Ngày còn lại, sắp xếp tăng dần
-            }
-        });
+    rows.sort(function(a, b) {
+        var dateA = new Date(parseDate(a.cells[4].textContent));
+        var dateB = new Date(parseDate(b.cells[4].textContent));
 
-        // Remove existing rows from the table
-        rows.forEach(function (row) {
-            table.deleteRow(row.rowIndex);
-        });
+        if (order === 'asc') {
+            return dateA - dateB; // Sắp xếp tăng dần theo ngày thi
+        } else {
+            return dateB - dateA; // Sắp xếp giảm dần theo ngày thi
+        }
+    });
 
-        // Append sorted rows back to the table
-        rows.forEach(function (row) {
-            table.appendChild(row);
-        });
+    // Xóa dữ liệu đã sắp xếp khỏi bảng
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
     }
 
-    function parseDate(dateString) {
-        // Hàm chuyển đổi chuỗi ngày thành đối tượng ngày
-        var parts = dateString.split("/");
-        return new Date(parts[2], parts[1] - 1, parts[0]);
-    }
+    // Thêm dữ liệu đã sắp xếp lại vào bảng
+    rows.forEach(function(row) {
+        table.appendChild(row);
+    });
+}
 </script>
 
 <?php
@@ -78,24 +74,29 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
 ?>
 
 <div class="full-lt">
-    <p style="color: #F15B2A; font-weight: 700; font-size:25px; text-align: center; padding: 30px;">LỊCH THI KHOA KỸ THUẬT VÀ CÔNG NGHỆ</p>
-    
+    <p style="color: #F15B2A; font-weight: 700; font-size:25px; text-align: center; padding: 30px;">LỊCH THI KHOA KỸ
+        THUẬT VÀ CÔNG NGHỆ</p>
+
     <form method="get" action="">
         <div class="fullloc">
-        <div class="loclop">
-            <label for="malop"><ion-icon name="search-outline"></ion-icon>&nbsp;</label>
-            <select name="malop" id="malop" onchange="this.form.submit()">
-                <option value="">Tất cả</option>
-                <?php echo $classOptions; ?>
-            </select>
-        </div>
-        <div class="locdate">
-            <label for="ngayBD"></label>
-            <input type="date" name="ngayBD" id="ngayBD" value="<?php echo $ngayBD; ?>" onchange="this.form.submit()">
+            <div class="loclop">
+                <label for="malop">
+                    <ion-icon name="search-outline"></ion-icon>&nbsp;
+                </label>
+                <select name="malop" id="malop" onchange="this.form.submit()">
+                    <option value="">Tất cả</option>
+                    <?php echo $classOptions; ?>
+                </select>
+            </div>
+            <div class="locdate">
+                <label for="ngayBD"></label>
+                <input type="date" name="ngayBD" id="ngayBD" value="<?php echo $ngayBD; ?>"
+                    onchange="this.form.submit()">
 
-            <label for="ngayKT">&nbsp;-&nbsp;</label>
-            <input type="date" name="ngayKT" id="ngayKT" value="<?php echo $ngayKT; ?>" onchange="this.form.submit()">
-        </div>
+                <label for="ngayKT">&nbsp;-&nbsp;</label>
+                <input type="date" name="ngayKT" id="ngayKT" value="<?php echo $ngayKT; ?>"
+                    onchange="this.form.submit()">
+            </div>
         </div>
     </form>
 
@@ -105,12 +106,21 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
             <tr style="background-color:#ED7D31; font-weight:600; color: white;">
                 <td width="5%">STT</td>
                 <td width="10%">Lớp</td>
-                <td width="10%">Mã hình thức</td>
-                <td width="15%">Môn thi</td>
-                <td width="10%">Ngày thi &nbsp;<button onclick="sortTableByDate()"><ion-icon name="caret-up-outline"></ion-icon></button></td>
+                <td width="15%">Mã hình thức</td>
+                <td width="30%">Môn thi</td>
+                <td class="full-date" >Ngày thi &nbsp;
+                    <div class="full-mt">
+                        <button onclick="sortTableByDate('asc')">
+                            <ion-icon name="caret-up-outline"></ion-icon>
+                        </button>
+                        <button onclick="sortTableByDate('desc')">
+                            <ion-icon name="caret-down-outline"></ion-icon>
+                        </button>
+                    </div>
+                </td>
                 <td width="10%">Phòng thi</td>
-                <td width="5%">Tiết thi</td>
-                <td width="15%">Tên lịch thi</td>
+                <td width="8%">Tiết thi</td>
+                <td width="20%">Tên lịch thi</td>
             </tr>
             <?php
             // Display table rows based on the query result

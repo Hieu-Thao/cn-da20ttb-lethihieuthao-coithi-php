@@ -1,7 +1,13 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 
 <script>
-function sortTableByDate() {
+function parseDate(dateString) {
+    // Hàm chuyển đổi chuỗi ngày thành đối tượng ngày
+    var parts = dateString.split("/");
+    return new Date(parts[2], parts[1] - 1, parts[0]);
+}
+
+function sortTableByDate(order) {
     var table = document.querySelector('.table-content');
     var rows = Array.from(table.rows).slice(1); // Bỏ qua hàng tiêu đề
 
@@ -9,7 +15,11 @@ function sortTableByDate() {
         var dateA = new Date(parseDate(a.cells[4].textContent));
         var dateB = new Date(parseDate(b.cells[4].textContent));
 
-        return dateB - dateA; // Sắp xếp giảm dần theo ngày thi
+        if (order === 'asc') {
+            return dateA - dateB; // Sắp xếp tăng dần theo ngày thi
+        } else {
+            return dateB - dateA; // Sắp xếp giảm dần theo ngày thi
+        }
     });
 
     // Xóa dữ liệu đã sắp xếp khỏi bảng
@@ -22,14 +32,6 @@ function sortTableByDate() {
         table.appendChild(row);
     });
 }
-
-function parseDate(dateString) {
-    // Hàm chuyển đổi chuỗi ngày thành đối tượng ngày
-    var parts = dateString.split("/");
-    return new Date(parts[2], parts[1] - 1, parts[0]);
-}
-
-
 </script>
 
 
@@ -104,14 +106,23 @@ $kq = mysqli_query($conn, $sql) or die("Không thể xuất thông tin người 
         <table width="95%" class="table-content">
             <tr style="background-color:#ED7D31; font-weight:600; color: white;">
                 <td width="5%">STT</td>
-                <td width="7%">Lớp</td>
-                <td width="7%">Hình thức</td>
-                <td width="15%">Môn thi</td>
-                <td width="10%">Ngày thi &nbsp;<button onclick="sortTableByDate()"><ion-icon name="caret-up-outline"></ion-icon></button></td>
+                <td width="8%">Lớp</td>
+                <td width="10%">Hình thức</td>
+                <td width="18%">Môn thi</td>
+                <td class="full-date" width="15%">Ngày thi &nbsp;
+                    <div class="full-mt">
+                        <button onclick="sortTableByDate('asc')">
+                            <ion-icon name="caret-up-outline"></ion-icon>
+                        </button>
+                        <button onclick="sortTableByDate('desc')">
+                            <ion-icon name="caret-down-outline"></ion-icon>
+                        </button>
+                    </div>
+                </td>
                 <td width="7%">Phòng thi</td>
                 <td width="5%">Tiết thi</td>
-                <td width="7%">Tên lịch thi</td>
-                <td width="15%">GV coi thi</td>
+                <td width="10%">Tên lịch thi</td>
+                <td width="20%">GV coi thi</td>
                 <td width="10%">Đăng ký thi</td>
             </tr>
             <?php

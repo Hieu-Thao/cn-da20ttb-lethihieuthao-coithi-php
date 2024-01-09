@@ -553,3 +553,18 @@ table, th, td {
     font-size: 20px;
 }
 
+.full-date{
+    display: flex;
+    width: 115px;
+    border: none;
+    height: 40px;
+    align-items: center;
+    padding: 30px 0px;
+    justify-content: center;
+}
+
+.full-mt{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
